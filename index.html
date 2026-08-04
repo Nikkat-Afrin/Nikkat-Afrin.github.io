@@ -150,6 +150,41 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .lnk:hover{color:var(--star);gap:10px}
 .lnk.demo{color:var(--pk)}
 
+
+/* ---------- award flip cards ---------- */
+.aw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:20px}
+.aw{perspective:1200px;height:326px;cursor:pointer}
+.aw-in{position:relative;width:100%;height:100%;transition:transform .68s cubic-bezier(.22,1,.36,1);
+  transform-style:preserve-3d}
+.aw:hover .aw-in,.aw:focus-visible .aw-in,.aw.flip .aw-in{transform:rotateY(180deg)}
+.aw-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel-solid);
+  display:flex;flex-direction:column}
+.aw:hover .aw-face{border-color:var(--line-hi)}
+/* front */
+.aw-img{flex:1;overflow:hidden;position:relative;background:#0a1222}
+.aw-img img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
+.aw-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(4,5,13,.9) 0%,rgba(4,5,13,.15) 42%,transparent 70%)}
+.aw-front-txt{padding:14px 17px 16px;position:relative}
+.aw-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--cy);margin-bottom:5px}
+.aw-title{font-size:1rem;font-weight:700;color:var(--star);line-height:1.32}
+.aw-org{color:var(--faint);font-size:.79rem;margin-top:4px}
+.aw-hint{position:absolute;top:13px;right:14px;font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  letter-spacing:.1em;color:#a8c3e0;background:rgba(4,10,22,.72);border:1px solid rgba(160,200,255,.28);
+  border-radius:100px;padding:3px 9px;backdrop-filter:blur(4px)}
+/* back */
+.aw-back{transform:rotateY(180deg);background:linear-gradient(155deg,#0d1730,#080e1e);
+  padding:22px 20px;justify-content:center;gap:11px}
+.aw-back h4{font-size:.97rem;font-weight:700;color:var(--star);line-height:1.32}
+.aw-back p{color:var(--dim);font-size:.865rem;line-height:1.62;margin:0}
+.aw-back .lnk{font-size:.8rem;margin-top:2px}
+.aw-when{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.1em;color:var(--cy)}
+@media(max-width:640px){.aw{height:308px}.aw-grid{grid-template-columns:1fr}}
+@media(hover:none){.aw-hint::before{content:'TAP'}.aw-hint{font-size:0}.aw-hint::before{font-size:.58rem}}
+@media(prefers-reduced-motion:reduce){.aw-in{transition:none}}
+
 /* ---------- experience cards ---------- */
 .xp{display:grid;gap:18px}
 .xp-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;
@@ -593,52 +628,106 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   </div>
 </section>
 
-<!-- ================= AWARDS + EDUCATION ================= -->
+<!-- ================= AWARDS ================= -->
 <section id="awards">
   <div class="rv">
     <div class="eyebrow">04 / Recognition</div>
-    <h2 class="sec">Awards &amp; <span class="grad">education</span></h2>
+    <h2 class="sec">Awards &amp; <span class="grad">achievements</span></h2>
+    <p class="sec-sub">Hover any card for the story behind it.</p>
   </div>
-  <div class="research rv" style="margin-bottom:24px">
-    <div class="card">
-      <div class="paper-tag">🏆 Winner · Spring 2025</div>
-      <h3>Best Research Project Award</h3>
-      <p>
-        Yeshiva University CSE Research Forum — awarded for first-author SigmaCam research
-        advancing AI model transparency through exact decision-boundary extraction for
-        neural networks.
-      </p>
-      <div class="tags"><span class="tag">Research</span><span class="tag">Interpretability</span></div>
-    </div>
-    <div class="card">
-      <div class="paper-tag">◆ Finalist · 2025</div>
-      <h3>Innovation Lab Challenge Finalist</h3>
-      <p>
-        Selected as <b>1 of 7 finalist teams from 30 teams and 84 registrants</b> to pitch
-        <b>CloseIQ</b>, an AI-powered sales prospecting tool.
-      </p>
-      <div class="tags"><span class="tag">Product Pitch</span><span class="tag">AI Product</span></div>
-    </div>
-  </div>
-  <div class="research rv">
-    <div class="card">
-      <div class="paper-tag">🎓 Graduate</div>
-      <h3>M.S. Data Analytics &amp; Visualization</h3>
-      <p>Yeshiva University, Katz School of Science &amp; Health · New York, NY</p>
-      <div class="mini-stats">
-        <div><b>3.95</b><span>GPA</span></div>
-        <div><b>Jan 2024 — Jan 2026</b><span>PROGRAMME</span></div>
+  <div class="aw-grid">
+    <article class="aw rv" tabindex="0" aria-label="Outstanding Research Project">
+      <div class="aw-in">
+        <div class="aw-face">
+          <div class="aw-img"><img src="assets/awards/research.jpg" alt="Receiving the Outstanding Research Project award at Yeshiva University" loading="lazy"></div>
+          <span class="aw-hint">HOVER</span>
+          <div class="aw-front-txt">
+            <div class="aw-badge">🏆 Winner</div>
+            <div class="aw-title">Outstanding Research Project</div>
+            <div class="aw-org">Yeshiva University · CSE Research Forum</div>
+          </div>
+        </div>
+        <div class="aw-face aw-back">
+          <div class="aw-when">SPRING 2025</div>
+          <h4>Won for SigmaCam</h4>
+          <p>Exact decision boundaries for smooth-activation networks — later published at IEEE IJCNN 2025. Presented alongside a Power BI capstone for the Shevet Glaubach Center.</p>
+        <a class="lnk" href="https://www.yu.edu/news/katz/forum-research-reflects-human-centered-vision-computer-science" target="_blank" rel="noopener" onclick="event.stopPropagation()">Read the YU feature →</a>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="paper-tag">🥇 Gold Medalist</div>
-      <h3>Bachelor of Computer Applications</h3>
-      <p>Andhra University · India — graduated as <b>Gold Medalist</b>, top of programme.<br><span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--faint)">Jun 2019 — Jul 2022</span></p>
-      <div class="mini-stats">
-        <div><b>4.0</b><span>GPA / 4.0</span></div>
-        <div><b>Gold</b><span>MEDALIST</span></div>
+    </article>
+    <article class="aw rv" tabindex="0" aria-label="Innovation Lab Challenge">
+      <div class="aw-in">
+        <div class="aw-face">
+          <div class="aw-img"><img src="assets/awards/innovation.jpg" alt="The CloseIQ team at the Yeshiva University Innovation Lab Challenge" loading="lazy"></div>
+          <span class="aw-hint">HOVER</span>
+          <div class="aw-front-txt">
+            <div class="aw-badge">◆ Finalist</div>
+            <div class="aw-title">Innovation Lab Challenge</div>
+            <div class="aw-org">Yeshiva University · Team CloseIQ</div>
+          </div>
+        </div>
+        <div class="aw-face aw-back">
+          <div class="aw-when">2025</div>
+          <h4>1 of 7 finalists from 30 teams</h4>
+          <p>Five days before Pitch Night, FCC rules killed our original concept. We rebuilt the entire business model from scratch and still pitched.</p>
+        </div>
       </div>
-    </div>
+    </article>
+    <article class="aw rv" tabindex="0" aria-label="Congressional Briefing, D.C.">
+      <div class="aw-in">
+        <div class="aw-face">
+          <div class="aw-img"><img src="assets/awards/congress.jpg" alt="Outside Congressman Brad Schneider's office in Washington, D.C." loading="lazy"></div>
+          <span class="aw-hint">HOVER</span>
+          <div class="aw-front-txt">
+            <div class="aw-badge">★ Invited</div>
+            <div class="aw-title">Congressional Briefing, D.C.</div>
+            <div class="aw-org">Peblink · World Literacy Research Center</div>
+          </div>
+        </div>
+        <div class="aw-face aw-back">
+          <div class="aw-when">WASHINGTON, D.C.</div>
+          <h4>Presented to Congressman Brad Schneider</h4>
+          <p>Showed the children's reading-assessment platform I built for WLRC, alongside Peblink's CEO and CMO. It ended with a job offer in the room.</p>
+        <a class="lnk" href="https://www.yu.edu/news/katz/data-analytics-student-designs-platform-identify-effective-literacy-programs" target="_blank" rel="noopener" onclick="event.stopPropagation()">Read the YU feature →</a>
+        </div>
+      </div>
+    </article>
+    <article class="aw rv" tabindex="0" aria-label="Dream Dinner — Alumna Mentor">
+      <div class="aw-in">
+        <div class="aw-face">
+          <div class="aw-img"><img src="assets/awards/dreamdinner.jpg" alt="At Dream Dinner 2026, hosted by the Shevet Glaubach Center" loading="lazy"></div>
+          <span class="aw-hint">HOVER</span>
+          <div class="aw-front-txt">
+            <div class="aw-badge">✦ Invited Mentor</div>
+            <div class="aw-title">Dream Dinner — Alumna Mentor</div>
+            <div class="aw-org">Shevet Glaubach Center · Museum of Jewish Heritage</div>
+          </div>
+        </div>
+        <div class="aw-face aw-back">
+          <div class="aw-when">2026 · NYC</div>
+          <h4>Returned to mentor, not to learn</h4>
+          <p>Invited back as a Katz School alumna to guide students, seated with a healthcare-AI founder and senior engineers from IBM and Paramount.</p>
+        </div>
+      </div>
+    </article>
+    <article class="aw rv" tabindex="0" aria-label="University Topper">
+      <div class="aw-in">
+        <div class="aw-face">
+          <div class="aw-img"><img src="assets/awards/topper.jpg" alt="Receiving the University Topper award at Andhra University" loading="lazy"></div>
+          <span class="aw-hint">HOVER</span>
+          <div class="aw-front-txt">
+            <div class="aw-badge">🥇 Gold Medalist</div>
+            <div class="aw-title">University Topper</div>
+            <div class="aw-org">Andhra University · India</div>
+          </div>
+        </div>
+        <div class="aw-face aw-back">
+          <div class="aw-when">2019 — 2022</div>
+          <h4>Top of the university, every year</h4>
+          <p>Awarded University Topper across two districts combined for every year of the programme. Graduated 4.0/4.0.</p>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -1094,6 +1183,19 @@ document.getElementById('skgrid').innerHTML=SKILLS.map(s=>`
     // stay as committed values rather than exposing a token in the browser
   }catch(e){/* keep committed numbers */}
 })();
+
+
+/* ---------------- award cards: tap to flip on touch ---------------- */
+document.querySelectorAll('.aw').forEach(function(c){
+  c.addEventListener('click',function(e){
+    if(e.target.closest('a'))return;              // let links work
+    if(matchMedia('(hover: hover)').matches)return; // desktop uses hover
+    c.classList.toggle('flip');
+  });
+  c.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('flip');}
+  });
+});
 
 /* ---------------- contact form ---------------- */
 document.getElementById('cform').addEventListener('submit',function(){
