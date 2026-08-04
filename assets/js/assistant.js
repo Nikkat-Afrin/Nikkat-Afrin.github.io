@@ -49,13 +49,13 @@
       id: "projects",
       k: ["projects", "portfolio", "built", "what has she built", "work samples", "repos", "repositories", "showcase"],
       q: "What projects has she built?",
-      a: "Highlights from the projects section:<br><br>• <b>Real-Time Voice Conversational AI</b> — Azure Speech + GPT-4o + RAG over Azure AI Search, streaming over FastAPI/WebSockets<br>• <b>SigmaCam</b> — exact decision boundaries for smooth-activation networks (IEEE IJCNN 2025)<br>• <b>Swap-Hedging Model Explorer</b> — XGBoost at <b>ROC-AUC 0.953</b> with a live threshold slider<br>• <b>Healthcare Provider Network</b> — interactive Tableau dashboards on Tableau Public<br>• <b>E-Commerce Segmentation</b> — K-Means + purchase intent, <b>AUC 0.929</b> over 12,330 sessions<br>• <b>Global HDI Dashboard</b> — 191 countries, R² ≈ 0.98<br>• <b>Climate Indicators ETL</b> — three climate sources merged into one 66-year series<br>• <b>Healthcare Data Platform</b> — PostgreSQL OLTP + SCD2 warehouse + Neo4j graph<br><br>Five of them are <b>live and interactive</b> — see the Dashboards section, or browse <a href='" + GITHUB + "' target='_blank' rel='noopener'>all 22 repos on GitHub →</a>"
+      a: "Highlights from the projects section:<br><br>• <b>Real-Time Voice Conversational AI</b> — Azure Speech + GPT-4o + RAG over Azure AI Search, streaming over FastAPI/WebSockets<br>• <b>SigmaCam</b> — exact decision boundaries for smooth-activation networks (IEEE IJCNN 2025)<br>• <b>Swap-Hedging Model Explorer</b> — XGBoost at <b>ROC-AUC 0.953</b> with a live threshold slider<br>• <b>Healthcare Provider Network</b> — interactive Tableau dashboards on Tableau Public<br>• <b>E-Commerce Segmentation</b> — K-Means + purchase intent, <b>AUC 0.929</b> over 12,330 sessions<br>• <b>Global HDI Dashboard</b> — 191 countries, R² ≈ 0.98<br>• <b>Climate Indicators ETL</b> — three climate sources merged into one 66-year series<br>• <b>Healthcare Data Platform</b> — PostgreSQL OLTP + SCD2 warehouse + Neo4j graph<br><br>Five of them are <b>live and interactive</b> — look for <b>▶ Try it live</b> on the card, or browse <a href='" + GITHUB + "' target='_blank' rel='noopener'>all 22 repos on GitHub →</a>"
     },
     {
       id: "dashboards",
       k: ["dashboard", "dashboards", "live", "demo", "interactive", "tableau", "try", "see it working"],
       q: "Can I see something live?",
-      a: "Yes — five deployments you can use right now, all in the <b>Dashboards</b> section of this page:<br><br>• <b>Swap-Hedging Explorer</b> — drag the threshold slider, watch precision/recall move<br>• <b>Global HDI Dashboard</b> — hover, zoom and pan 191 countries<br>• <b>E-Commerce Segments</b> — 12,330 sessions, 4 K-Means segments<br>• <b>Climate Indicators</b> — CO₂, temperature anomaly and sea level<br>• <b>Tableau — NYC Provider Network</b> — published to Tableau Public<br><br>They're embedded directly in the page, so nothing to install."
+      a: "Yes — five deployments you can use right now. Each one lives on its project card in <b>Selected Work</b> — hit <b>▶ Try it live</b> and it opens right here on the page:<br><br>• <b>Swap-Hedging Explorer</b> — drag the threshold slider, watch precision/recall move<br>• <b>Global HDI Dashboard</b> — hover, zoom and pan 191 countries<br>• <b>E-Commerce Segments</b> — 12,330 sessions, 4 K-Means segments<br>• <b>Climate Indicators</b> — CO₂, temperature anomaly and sea level<br>• <b>Tableau — NYC Provider Network</b> — published to Tableau Public<br><br>They open in an overlay on the page, so there's nothing to install and no tab to lose."
     },
     {
       id: "skills",
@@ -145,7 +145,7 @@
     experience: { id: "experience", label: "Experience" },
     research:   { id: "research",   label: "Research" },
     projects:   { id: "work",       label: "Projects" },
-    dashboards: { id: "dashboards", label: "Dashboards" },
+    dashboards: { id: "work",       label: "Projects" },
     skills:     { id: "skills",     label: "Skills" },
     ai_ml:      { id: "skills",     label: "Skills" },
     cloud:      { id: "skills",     label: "Skills" },

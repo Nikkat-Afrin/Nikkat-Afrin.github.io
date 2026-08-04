@@ -250,6 +250,11 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .p-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
   opacity:0;transition:opacity .35s;pointer-events:none}
 .p-card:hover .p-vid{opacity:1}
+.live-btn{background:none;border:0;padding:0;cursor:pointer;font-family:'Space Grotesk',sans-serif;
+  font-size:.855rem;font-weight:600;color:#4ade80;display:inline-flex;align-items:center;gap:6px;transition:.24s}
+.live-btn:hover{color:#86efac;gap:9px}
+.plb iframe{width:min(96vw,1420px);height:86vh;border:1px solid var(--line-hi);border-radius:12px;
+  background:#fff;box-shadow:0 24px 70px rgba(0,0,0,.7)}
 .plb video{max-width:96vw;max-height:92vh;border-radius:12px;border:1px solid var(--line-hi);
   box-shadow:0 24px 70px rgba(0,0,0,.7);background:#000}
 .p-play{position:absolute;bottom:10px;right:11px;z-index:2;font-family:'JetBrains Mono',monospace;
@@ -388,7 +393,6 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       <a href="#experience">Experience</a>
       <a href="#awards">Awards</a>
       <a href="#work">Projects</a>
-      <a href="#dashboards">Dashboards</a>
       <a href="#skills">Skills</a>
       <a href="#creative">Creative</a>
       <a href="#contact" class="nav-cta">Contact</a>
@@ -786,24 +790,10 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   <div class="more-wrap rv"><button class="btn btn-g" id="moreBtn">Show all projects ↓</button></div>
 </section>
 
-<!-- ================= DASHBOARDS ================= -->
-<section id="dashboards">
-  <div class="rv">
-    <div class="eyebrow">06 / Interactive</div>
-    <h2 class="sec">Live <span class="grad">dashboards</span></h2>
-    <p class="sec-sub">Real deployments, not screenshots. Drag the sliders, hover the maps — these are running right now.</p>
-  </div>
-  <div class="rv">
-    <div class="dash-tabs" id="dashTabs"></div>
-    <iframe class="dframe" id="dframe" title="Live dashboard" loading="lazy"></iframe>
-    <div class="dnote" id="dnote"></div>
-  </div>
-</section>
-
 <!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="rv">
-    <div class="eyebrow">07 / Toolkit</div>
+    <div class="eyebrow">06 / Toolkit</div>
     <h2 class="sec">Technologies I <span class="grad">work in</span></h2>
   </div>
   <div class="sk-grid" id="skgrid"></div>
@@ -812,7 +802,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <!-- ================= GITHUB ================= -->
 <section id="github">
   <div class="rv">
-    <div class="eyebrow">08 / Activity</div>
+    <div class="eyebrow">07 / Activity</div>
     <h2 class="sec">On <span class="grad">GitHub</span></h2>
     <p class="sec-sub">Repository and pull-request counts refresh live from the GitHub API.</p>
   </div>
@@ -832,7 +822,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <!-- ================= CREATIVE ================= -->
 <section id="creative">
   <div class="rv">
-    <div class="eyebrow">09 / Creative</div>
+    <div class="eyebrow">08 / Creative</div>
     <h2 class="sec">Sand, canvas &amp; <span class="grad">a hot pan</span></h2>
     <p class="sec-sub">
       I cook and I paint with sand. It's the same instinct as engineering, honestly — take
@@ -873,7 +863,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <div class="contact rv">
-    <div class="eyebrow">10 / Contact</div>
+    <div class="eyebrow">09 / Contact</div>
     <h2 class="sec">Let's build something <span class="grad">meaningful</span></h2>
     <p class="sec-sub" style="margin:0 auto 0">
       I'm open to roles and collaboration in <b>AI/ML engineering, data platforms, and applied AI research</b>.
@@ -1053,7 +1043,7 @@ const PROJECTS=[
   m:'Published to Tableau Public',
   tags:['Tableau','Healthcare','Geospatial','BI'],
   repo:'https://github.com/Nikkat-Afrin/healthcare-provider-network-tableau',
-  demo:'https://public.tableau.com/app/profile/nikkat.afrin/viz/NYCInsuranceNetwork/modifieddashboard',live:true},
+  demo:'https://public.tableau.com/views/NYCInsuranceNetwork/modifieddashboard?:showVizHome=no&:embed=true',live:true},
 
  {t:'E-Commerce Segmentation & Purchase Intent',img:'ecom.jpg',full:'ecom-full.jpg',k:'ml',kind:'ML · Live',
   d:'K-Means behavioural segmentation plus a purchase-intent model over 12,330 shopping sessions, with a threshold explorer showing the trade-off a marketing team actually tunes.',
@@ -1160,7 +1150,8 @@ function render(){
       <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       <div class="links">
         <a class="lnk" href="${p.repo}" target="_blank" rel="noopener">${p.repoLabel||'Code →'}</a>
-        ${p.demo?`<a class="lnk demo" href="${p.demo}" target="_blank" rel="noopener">${p.demoLabel||'Live demo →'}</a>`:''}
+        ${p.live?`<button class="lnk live-btn" data-live="${p.demo}" data-cap="${p.t}">▶ Try it live</button>`:''}
+        ${p.demo?`<a class="lnk demo" href="${p.demo}" target="_blank" rel="noopener">${p.demoLabel||(p.live?'Open in new tab →':'Live demo →')}</a>`:''}
       </div>
     </article>`).join('');
   wireGifs();
@@ -1208,30 +1199,6 @@ document.getElementById('moreBtn').onclick=function(){
   expanded=!expanded; applyView();
   if(!expanded)document.getElementById('work').scrollIntoView({behavior:'smooth',block:'start'});
 };
-
-/* ---------------- dashboards ---------------- */
-const DASH=[
- {n:'Swap-Hedging Explorer',u:'https://nikkat-afrin.github.io/banking-swap-hedging-ml/',
-  note:'Drag the threshold slider — precision and recall update live. Test ROC-AUC 0.953.'},
- {n:'HDI Global',u:'https://nikkat-afrin.github.io/hdi-global-policy-analysis/',
-  note:'Hover, zoom and pan the choropleth. 191 countries, UNDP HDR 2021–22.'},
- {n:'E-Commerce Segments',u:'https://nikkat-afrin.github.io/customer-churn-segmentation-ecommerce/',
-  note:'12,330 sessions · 4 K-Means segments · purchase-intent AUC 0.929.'},
- {n:'Climate Indicators',u:'https://nikkat-afrin.github.io/climate-change-analysis-python/',
-  note:'CO₂, temperature anomaly and sea level merged by an ETL pipeline with quality gates.'},
- {n:'Tableau — Provider Network',u:'https://public.tableau.com/views/NYCInsuranceNetwork/modifieddashboard?:showVizHome=no&:embed=true',
-  note:'NYC healthcare provider network. Opens best on Tableau Public if the embed is slow.'}
-];
-const tabs=document.getElementById('dashTabs'),fr=document.getElementById('dframe'),dn=document.getElementById('dnote');
-tabs.innerHTML=DASH.map((d,i)=>`<button class="fbtn ${i?'':'act'}" data-i="${i}">${d.n}</button>`).join('');
-function loadDash(i){
-  fr.src=DASH[i].u;
-  dn.textContent='▸ '+DASH[i].note;
-  tabs.querySelectorAll('.fbtn').forEach((b,j)=>b.classList.toggle('act',i===j));
-}
-tabs.onclick=e=>{const b=e.target.closest('.fbtn');if(b)loadDash(+b.dataset.i)};
-new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){loadDash(0);o.disconnect()}}),{threshold:.1})
-  .observe(document.getElementById('dashboards'));
 
 /* ---------------- skills ---------------- */
 const SKILLS=[
@@ -1290,10 +1257,22 @@ document.querySelectorAll('.aw').forEach(function(c){
   const box=document.getElementById('plb');
   if(!box)return;
   const img=document.getElementById('plbI'), cap=document.getElementById('plbC');
-  let vid=null;
+  let vid=null, frame=null;
   function clear(){ img.style.display='none'; img.removeAttribute('src');
-    if(vid){vid.pause();vid.remove();vid=null;} }
+    if(vid){vid.pause();vid.remove();vid=null;}
+    if(frame){frame.remove();frame=null;} }
+  function openLive(url,capText){
+    clear();
+    frame=document.createElement('iframe');
+    frame.src=url; frame.loading='lazy'; frame.title=capText||'Live dashboard';
+    frame.setAttribute('allowfullscreen','');
+    box.insertBefore(frame,cap);
+    cap.textContent=(capText?capText+' — ':'')+'live and interactive';
+    box.classList.add('on'); document.body.style.overflow='hidden';
+  }
   document.addEventListener('click',e=>{
+    const lb=e.target.closest('.live-btn');
+    if(lb){ openLive(lb.dataset.live, lb.dataset.cap); return; }
     const cover=e.target.closest('.p-cover');
     if(!cover)return;
     const src=cover.dataset.full||'';
@@ -1321,6 +1300,6 @@ document.getElementById('cform').addEventListener('submit',function(){
   b.textContent='Sending…'; b.disabled=true;
 });
 </script>
-<script src="assets/js/assistant.js?v=4" defer></script>
+<script src="assets/js/assistant.js?v=5" defer></script>
 </body>
 </html>
