@@ -150,19 +150,42 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .lnk:hover{color:var(--star);gap:10px}
 .lnk.demo{color:var(--pk)}
 
-/* experience timeline */
-.tl{position:relative;padding-left:34px}
-.tl::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:1px;
-  background:linear-gradient(180deg,var(--cy),var(--vi),transparent)}
-.tl-item{position:relative;margin-bottom:38px}
-.tl-item::before{content:'';position:absolute;left:-30px;top:7px;width:11px;height:11px;border-radius:50%;
-  background:var(--bg);border:2px solid var(--cy);box-shadow:0 0 12px rgba(34,211,238,.55)}
-.tl-when{font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--cy);letter-spacing:.1em;margin-bottom:5px}
-.tl-role{font-size:1.16rem;font-weight:700;color:var(--star);margin-bottom:2px}
-.tl-org{color:var(--vi);font-size:.93rem;font-weight:600;margin-bottom:11px}
-.tl-item ul{list-style:none;display:grid;gap:8px}
-.tl-item li{color:var(--dim);font-size:.925rem;padding-left:17px;position:relative}
-.tl-item li::before{content:'▸';position:absolute;left:0;color:var(--cy)}
+/* ---------- experience cards ---------- */
+.xp{display:grid;gap:18px}
+.xp-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;
+  backdrop-filter:blur(9px);transition:.32s;position:relative;overflow:hidden}
+.xp-card::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;opacity:0;transition:opacity .32s;
+  background:var(--grad);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.xp-card:hover{transform:translateY(-4px);background:rgba(18,26,52,.7)}
+.xp-card:hover::before{opacity:.8}
+.xp-head{display:flex;gap:17px;align-items:flex-start;margin-bottom:18px}
+.xp-logo{width:54px;height:54px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem;letter-spacing:-.01em;
+  border:1px solid var(--line-hi);background:radial-gradient(circle at 32% 28%,#132542,#080e1c);
+  color:var(--cy);box-shadow:0 0 26px rgba(34,211,238,.14)}
+.xp-logo img{width:100%;height:100%;object-fit:contain;border-radius:12px;padding:7px}
+.xp-meta{flex:1;min-width:0}
+.xp-role{font-size:1.14rem;font-weight:700;color:var(--star);line-height:1.3;margin-bottom:3px}
+.xp-org{color:var(--vi);font-size:.94rem;font-weight:600}
+.xp-loc{color:var(--faint);font-size:.83rem;margin-top:3px}
+.xp-right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+.xp-when{font-family:'JetBrains Mono',monospace;font-size:.735rem;color:var(--cy);letter-spacing:.06em;white-space:nowrap}
+.xp-kind{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);border:1px solid var(--line);border-radius:100px;padding:3px 10px;white-space:nowrap}
+.xp-now{color:#4ade80;border-color:rgba(74,222,128,.34);display:inline-flex;align-items:center;gap:5px}
+.xp-now::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 7px #4ade80;animation:pulse 1.9s infinite}
+.xp-body{border-top:1px solid var(--line);padding-top:16px}
+.xp-body ul{list-style:none;display:grid;gap:9px;margin-bottom:15px}
+.xp-body li{color:var(--dim);font-size:.925rem;padding-left:18px;position:relative;line-height:1.6}
+.xp-body li::before{content:'▸';position:absolute;left:0;color:var(--cy)}
+.xp-body li b{color:var(--star)}
+@media(max-width:640px){
+  .xp-head{flex-wrap:wrap}
+  .xp-right{text-align:left;align-items:flex-start;width:100%;flex-direction:row;flex-wrap:wrap}
+  .xp-card{padding:20px}
+}
 
 /* projects */
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:34px}
@@ -432,84 +455,139 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
     <h2 class="sec">Where I've <span class="grad">built things</span></h2>
     <p class="sec-sub">Engineering AI and data systems in production, plus research and graduate work.</p>
   </div>
-  <div class="tl rv" id="timeline">
+  <div class="xp">
 
-    <div class="tl-item">
-      <div class="tl-when">JAN 2026 — PRESENT · FULL-TIME</div>
-      <div class="tl-role">Data &amp; AI Platform Engineer</div>
-      <div class="tl-org">Peblink — World Literacy Research Center · New York, NY</div>
-      <ul>
-        <li>Reached <b>93% pronunciation-detection accuracy</b> building a speech-AI reading assessment workflow that transcribes and aligns children's oral reading using Whisper / faster-Whisper, FastAPI, Python text matching and Levenshtein similarity</li>
-        <li>Cut reading-assessment review time from <b>60+ minutes to under 5</b> with a serverless AWS pipeline — S3 presigned uploads, SQS-triggered processing, Dockerized Lambda jobs, results in DynamoDB</li>
-        <li>Enabled teachers to flag <b>dyslexia-risk reading patterns in seconds</b> using transcript alignment and age-normed WPM scoring</li>
-        <li>Made results analytics-ready as DynamoDB tables and S3 Parquet datasets, queryable via Athena and visualized in QuickSight</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">faster-Whisper</span>
-        <span class="tag">AWS Lambda</span><span class="tag">SQS</span><span class="tag">DynamoDB</span>
-        <span class="tag">Athena</span><span class="tag">QuickSight</span><span class="tag">Docker</span>
+    <article class="xp-card rv">
+      <div class="xp-head">
+        <div class="xp-logo">P</div>
+        <div class="xp-meta">
+          <div class="xp-role">Data &amp; AI Platform Engineer</div>
+          <div class="xp-org">Peblink — World Literacy Research Center</div>
+          <div class="xp-loc">📍 New York, NY</div>
+        </div>
+        <div class="xp-right">
+          <div class="xp-when">Jan 2026 — Present</div>
+          <span class="xp-kind xp-now">Current</span>
+        </div>
       </div>
-    </div>
+      <div class="xp-body">
+        <ul>
+          <li>Reached <b>93% pronunciation-detection accuracy</b> building a speech-AI reading assessment workflow that transcribes and aligns children's oral reading using Whisper / faster-Whisper, FastAPI, Python text matching and Levenshtein similarity</li>
+          <li>Cut reading-assessment review time from <b>60+ minutes to under 5</b> with a serverless AWS pipeline — S3 presigned uploads, SQS-triggered processing, Dockerized Lambda jobs, results in DynamoDB</li>
+          <li>Enabled teachers to flag <b>dyslexia-risk reading patterns in seconds</b> using transcript alignment and age-normed WPM scoring</li>
+          <li>Made results analytics-ready as DynamoDB tables and S3 Parquet datasets, queryable via Athena and visualized in QuickSight</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">faster-Whisper</span>
+          <span class="tag">AWS Lambda</span><span class="tag">SQS</span><span class="tag">DynamoDB</span>
+          <span class="tag">Athena</span><span class="tag">QuickSight</span><span class="tag">Docker</span>
+        </div>
+      </div>
+    </article>
 
-    <div class="tl-item">
-      <div class="tl-when">MAY 2025 — JAN 2026 · INTERNSHIP</div>
-      <div class="tl-role">AI / Data Analyst</div>
-      <div class="tl-org">Peblink — World Literacy Research Center · New York, NY</div>
-      <ul>
-        <li>Architected the <b>WLRC global literacy AI/data hub blueprint in 8 weeks</b> — AWS data flows, role-based user journeys, ingestion pipelines and prototype dashboards for universities and NGOs; <b>featured by YU Katz</b></li>
-        <li>Built a literacy-impact benchmarking framework from <b>30+ public sources</b>, comparing programs with 15–20% reading-score gains across reading ability, usability, cultural fit, scalability and cost</li>
-        <li>Secured a <b>Washington, D.C. meeting with Illinois Congressman Brad Schneider</b> by translating analytical findings into AI product requirements that shaped roadmap and partnership decisions</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">AWS Architecture</span><span class="tag">Python</span><span class="tag">Tableau</span>
-        <span class="tag">Data Strategy</span><span class="tag">Stakeholder Comms</span>
+    <article class="xp-card rv">
+      <div class="xp-head">
+        <div class="xp-logo">P</div>
+        <div class="xp-meta">
+          <div class="xp-role">AI / Data Analyst</div>
+          <div class="xp-org">Peblink — World Literacy Research Center</div>
+          <div class="xp-loc">📍 New York, NY</div>
+        </div>
+        <div class="xp-right">
+          <div class="xp-when">May 2025 — Jan 2026</div>
+          <span class="xp-kind">Internship</span>
+        </div>
       </div>
-    </div>
+      <div class="xp-body">
+        <ul>
+          <li>Architected the <b>WLRC global literacy AI/data hub blueprint in 8 weeks</b> — AWS data flows, role-based user journeys, ingestion pipelines and prototype dashboards for universities and NGOs; <b>featured by YU Katz</b></li>
+          <li>Built a literacy-impact benchmarking framework from <b>30+ public sources</b>, comparing programs with 15–20% reading-score gains across reading ability, usability, cultural fit, scalability and cost</li>
+          <li>Secured a <b>Washington, D.C. meeting with Illinois Congressman Brad Schneider</b> by translating analytical findings into AI product requirements that shaped roadmap and partnership decisions</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">AWS Architecture</span><span class="tag">Python</span><span class="tag">Tableau</span>
+          <span class="tag">Data Strategy</span><span class="tag">Stakeholder Comms</span>
+        </div>
+      </div>
+    </article>
 
-    <div class="tl-item">
-      <div class="tl-when">AUG 2025 — DEC 2025 · INTERNSHIP</div>
-      <div class="tl-role">AI Workflow / Data Engineer</div>
-      <div class="tl-org">KAYAAN Inc. — Logistics AI Startup · New York, NY</div>
-      <ul>
-        <li>Drove a <b>24% investor connection rate</b> and 8% follow-up engagement with an <b>n8n AI-agent workflow</b> that researched AI and supply-chain investors, generated personalized outreach from their profiles and past investments, and tracked campaigns in Google Sheets</li>
-        <li>Gave leadership <b>15+ operational, engagement and profitability KPIs</b> through a React analytics dashboard surfacing platform usage, driver/load activity and product performance</li>
-        <li>Improved release readiness by documenting <b>20–40 QA tickets per sprint</b>, testing AI-enabled logistics workflows and coordinating fixes pre-launch</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">n8n</span><span class="tag">AI Agents</span><span class="tag">React</span>
-        <span class="tag">KPI Dashboards</span><span class="tag">QA</span>
+    <article class="xp-card rv">
+      <div class="xp-head">
+        <div class="xp-logo">K</div>
+        <div class="xp-meta">
+          <div class="xp-role">AI Workflow / Data Engineer</div>
+          <div class="xp-org">KAYAAN Inc. — Logistics AI Startup</div>
+          <div class="xp-loc">📍 New York, NY</div>
+        </div>
+        <div class="xp-right">
+          <div class="xp-when">Aug 2025 — Dec 2025</div>
+          <span class="xp-kind">Internship</span>
+        </div>
       </div>
-    </div>
+      <div class="xp-body">
+        <ul>
+          <li>Drove a <b>24% investor connection rate</b> and 8% follow-up engagement with an <b>n8n AI-agent workflow</b> that researched AI and supply-chain investors, generated personalized outreach from their profiles and past investments, and tracked campaigns in Google Sheets</li>
+          <li>Gave leadership <b>15+ operational, engagement and profitability KPIs</b> through a React analytics dashboard surfacing platform usage, driver/load activity and product performance</li>
+          <li>Improved release readiness by documenting <b>20–40 QA tickets per sprint</b>, testing AI-enabled logistics workflows and coordinating fixes pre-launch</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">n8n</span><span class="tag">AI Agents</span><span class="tag">React</span>
+          <span class="tag">KPI Dashboards</span><span class="tag">QA</span>
+        </div>
+      </div>
+    </article>
 
-    <div class="tl-item">
-      <div class="tl-when">JAN 2025 — DEC 2025 · GRADUATE ASSISTANT</div>
-      <div class="tl-role">Graduate Assistant — Data &amp; AI</div>
-      <div class="tl-org">Yeshiva University, Shevet Glaubach Career Center · New York, NY</div>
-      <ul>
-        <li>Co-built <b>FELIX</b>, a RAG chatbot delivering instant Canvas navigation, course-material and career-resource answers using LangChain, ChromaDB, OpenAI GPT-4/3.5, Flask and Azure</li>
-        <li>Eliminated <b>40+ staff hours per week</b> of manual reporting by automating Symplicity CSM ingestion through Azure Functions, Blob Storage, PostgreSQL and Databricks</li>
-        <li>Improved advising productivity <b>12%</b> with Power BI dashboards on Azure-Databricks outputs tracking advising activity, student engagement and appointment trends</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">LangChain</span><span class="tag">ChromaDB</span><span class="tag">RAG</span>
-        <span class="tag">Azure Functions</span><span class="tag">Databricks</span><span class="tag">Power BI</span><span class="tag">Flask</span>
+    <article class="xp-card rv">
+      <div class="xp-head">
+        <div class="xp-logo">YU</div>
+        <div class="xp-meta">
+          <div class="xp-role">Graduate Assistant — Data &amp; AI</div>
+          <div class="xp-org">Yeshiva University, Shevet Glaubach Career Center</div>
+          <div class="xp-loc">📍 New York, NY</div>
+        </div>
+        <div class="xp-right">
+          <div class="xp-when">Jan 2025 — Dec 2025</div>
+          <span class="xp-kind">Graduate Assistant</span>
+        </div>
       </div>
-    </div>
+      <div class="xp-body">
+        <ul>
+          <li>Co-built <b>FELIX</b>, a RAG chatbot delivering instant Canvas navigation, course-material and career-resource answers using LangChain, ChromaDB, OpenAI GPT-4/3.5, Flask and Azure</li>
+          <li>Eliminated <b>40+ staff hours per week</b> of manual reporting by automating Symplicity CSM ingestion through Azure Functions, Blob Storage, PostgreSQL and Databricks</li>
+          <li>Improved advising productivity <b>12%</b> with Power BI dashboards on Azure-Databricks outputs tracking advising activity, student engagement and appointment trends</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">LangChain</span><span class="tag">ChromaDB</span><span class="tag">RAG</span>
+          <span class="tag">Azure Functions</span><span class="tag">Databricks</span><span class="tag">Power BI</span><span class="tag">Flask</span>
+        </div>
+      </div>
+    </article>
 
-    <div class="tl-item">
-      <div class="tl-when">JUN 2024 — AUG 2025 · GRADUATE ASSISTANT</div>
-      <div class="tl-role">Graduate Assistant — AI &amp; Admissions</div>
-      <div class="tl-org">Yeshiva University, Katz School of Science &amp; Health · New York, NY</div>
-      <ul>
-        <li>Built an <b>admissions ChatGPT assistant</b> that helped GAs answer applicant questions and draft emails using structured prompts, reusable templates and admissions knowledge content</li>
-        <li>Improved admissions decision-making with <b>Power BI reports</b> tracking applicant funnel stages, outreach activity, application status and enrollment trends across Recruit Ellucian and HubSpot</li>
-        <li>Streamlined high-volume processing by reconciling and cleaning applicant CRM data, improving data quality across application cycles</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">OpenAI API</span><span class="tag">Power BI</span>
-        <span class="tag">Recruit Ellucian</span><span class="tag">HubSpot</span><span class="tag">Data Quality</span>
+    <article class="xp-card rv">
+      <div class="xp-head">
+        <div class="xp-logo">YU</div>
+        <div class="xp-meta">
+          <div class="xp-role">Graduate Assistant — AI &amp; Admissions</div>
+          <div class="xp-org">Yeshiva University, Katz School of Science &amp; Health</div>
+          <div class="xp-loc">📍 New York, NY</div>
+        </div>
+        <div class="xp-right">
+          <div class="xp-when">Jun 2024 — Aug 2025</div>
+          <span class="xp-kind">Graduate Assistant</span>
+        </div>
       </div>
-    </div>
+      <div class="xp-body">
+        <ul>
+          <li>Built an <b>admissions ChatGPT assistant</b> that helped GAs answer applicant questions and draft emails using structured prompts, reusable templates and admissions knowledge content</li>
+          <li>Improved admissions decision-making with <b>Power BI reports</b> tracking applicant funnel stages, outreach activity, application status and enrollment trends across Recruit Ellucian and HubSpot</li>
+          <li>Streamlined high-volume processing by reconciling and cleaning applicant CRM data, improving data quality across application cycles</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">OpenAI API</span><span class="tag">Power BI</span>
+          <span class="tag">Recruit Ellucian</span><span class="tag">HubSpot</span><span class="tag">Data Quality</span>
+        </div>
+      </div>
+    </article>
 
   </div>
 </section>
