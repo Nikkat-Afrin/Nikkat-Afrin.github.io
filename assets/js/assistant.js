@@ -137,6 +137,32 @@
     }
   ];
 
+
+  /* which on-page section each answer relates to (for the jump button) */
+  var JUMP = {
+    who:        { id: "about",      label: "About" },
+    current:    { id: "experience", label: "Experience" },
+    experience: { id: "experience", label: "Experience" },
+    research:   { id: "research",   label: "Research" },
+    projects:   { id: "work",       label: "Projects" },
+    dashboards: { id: "dashboards", label: "Dashboards" },
+    skills:     { id: "skills",     label: "Skills" },
+    ai_ml:      { id: "skills",     label: "Skills" },
+    cloud:      { id: "skills",     label: "Skills" },
+    data_eng:   { id: "work",       label: "Projects" },
+    voice_ai:   { id: "work",       label: "Projects" },
+    impact:     { id: "experience", label: "Experience" },
+    education:  { id: "awards",     label: "Education" },
+    awards:     { id: "awards",     label: "Awards" },
+    github:     { id: "github",     label: "GitHub" },
+    creative:   { id: "creative",   label: "Creative" },
+    contact:    { id: "contact",    label: "Contact" },
+    resume:     { id: "top",        label: "Top" },
+    location:   { id: "about",      label: "About" }
+  };
+  // on the gallery / thanks pages there are no sections to scroll to
+  function sectionExists(id) { return !!document.getElementById(id); }
+
   /* answers for things deliberately NOT disclosed */
   var PRIVATE_PATTERNS = /(phone|mobile|cell|number|whatsapp|call her|address|home address|where does she live exactly|salary|compensation|pay|earn|earning|earns|wage|income|ctc|visa|sponsor|age|how old|\\bold\\b|birth|married|marital|relationship|religion|nationality|citizenship)/i;
   var PRIVATE_ANSWER =
@@ -249,6 +275,12 @@
     ".typing i{width:6px;height:6px;border-radius:50%;background:#22d3ee;display:block;animation:tp 1.3s infinite}",
     ".typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}",
     "@keyframes tp{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}",
+    ".jump{margin-top:11px;display:inline-flex;align-items:center;gap:7px;background:rgba(34,211,238,.1);",
+      "border:1px solid rgba(34,211,238,.34);color:#22d3ee;padding:6px 13px;border-radius:100px;",
+      "font-size:.76rem;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:.22s}",
+    ".jump:hover{background:rgba(34,211,238,.2);transform:translateX(2px)}",
+    ".hl{animation:hl 2.4s ease-out 1}",
+    "@keyframes hl{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}18%{box-shadow:0 0 0 3px rgba(34,211,238,.5)}}",
     ".note{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:#46587c;text-align:center;padding:0 17px 9px;flex-shrink:0}",
     "@media(max-width:520px){#ap{height:calc(100vh - 26px);bottom:13px;right:13px}}",
     "@media(prefers-reduced-motion:reduce){#ab,.typing i{animation:none;transition:none}}"
@@ -263,12 +295,10 @@
   panel.setAttribute("aria-label", "Portfolio assistant");
   panel.innerHTML =
     '<div class="ah"><div class="ah-av">NA</div>' +
-      '<div><div class="ah-t">Ask about Nikkat</div>' +
-      '<div class="ah-s">answers only from this portfolio</div></div>' +
+      '<div><div class="ah-t">Ask about Nikkat</div></div>' +
       '<button class="ah-x" aria-label="Close">✕</button></div>' +
     '<div class="am" id="am"></div>' +
     '<div class="chips" id="chips"></div>' +
-    '<div class="note">Grounded in her résumé &amp; portfolio — no guessing.</div>' +
     '<form class="af" id="af"><input id="ai" placeholder="Ask a question…" autocomplete="off" ' +
       'aria-label="Your question"><button type="submit" aria-label="Send">→</button></form>';
 
@@ -304,6 +334,20 @@
       chips.appendChild(b);
     });
   }
+
+  /* scroll the page to a section while leaving the answer on screen */
+  function goTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var narrow = window.matchMedia("(max-width: 620px)").matches;
+    if (narrow) close();               // on phones the panel covers the page
+    setTimeout(function () {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.classList.add("hl");
+      setTimeout(function () { el.classList.remove("hl"); }, 2500);
+    }, narrow ? 210 : 0);
+  }
+
   function ask(q) {
     q = String(q || "").trim();
     if (!q) return;
@@ -312,8 +356,21 @@
     var t = typing();
     setTimeout(function () {
       t.remove();
-      add(answer(q).a, "b");
-      // rotate suggestions so the chips stay useful
+      var res = answer(q);
+      var bubble = add(res.a, "b");
+
+      // add a "jump to section" button when the answer maps to a section on this page
+      var j = JUMP[res.id];
+      if (j && sectionExists(j.id)) {
+        var btnJ = document.createElement("button");
+        btnJ.className = "jump";
+        btnJ.type = "button";
+        btnJ.innerHTML = "Jump to " + j.label + " \u2192";
+        btnJ.onclick = function () { goTo(j.id); };
+        bubble.appendChild(document.createElement("br"));
+        bubble.appendChild(btnJ);
+        box.scrollTop = box.scrollHeight;
+      }
       renderChips(CHIPS.filter(function (c) { return c.toLowerCase() !== q.toLowerCase(); }).slice(0, 4));
     }, 420 + Math.random() * 280);
   }
