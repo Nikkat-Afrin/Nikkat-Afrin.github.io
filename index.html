@@ -74,7 +74,7 @@ h2.sec{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:700;letter-spacing:-.02em;
 /* ---------- hero ---------- */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
   max-width:var(--max);margin:0 auto;padding:120px 26px 70px;position:relative}
-.hero-top{display:grid;grid-template-columns:1.28fr .72fr;gap:44px;align-items:center}
+.hero-top{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .hi{font-family:'JetBrains Mono',monospace;color:var(--cy);font-size:.87rem;letter-spacing:.2em;margin-bottom:18px}
 h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-spacing:-.035em;margin-bottom:8px}
 .role{font-size:clamp(1.05rem,2.4vw,1.5rem);font-weight:600;margin-bottom:20px;min-height:1.6em}
@@ -99,24 +99,24 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
   font-family:'JetBrains Mono',monospace;line-height:1.35;display:block}
 
 /* hero figure: full-length cutout on an orbiting stage, two shots crossfading */
-.orbit-wrap{position:relative;display:flex;align-items:flex-end;justify-content:center;
-  min-height:520px;padding-bottom:16px}
+.orbit-wrap{position:relative;display:flex;align-items:center;justify-content:center;
+  min-height:600px;padding-bottom:8px}
 .orb{position:absolute;border:1px solid var(--line);border-radius:50%;animation:spin 22s linear infinite;
-  bottom:44px;left:50%;pointer-events:none}
+  top:50%;left:50%;pointer-events:none}
 .orb::after{content:'';position:absolute;width:7px;height:7px;border-radius:50%;background:var(--cy);
   box-shadow:0 0 14px var(--cy);top:-4px;left:50%}
-.orb1{width:250px;height:250px;margin-left:-125px} .orb2{width:330px;height:330px;margin-left:-165px;animation-duration:34s;animation-direction:reverse}
+.orb1{width:320px;height:320px;margin-left:-160px} .orb2{width:414px;height:414px;margin-left:-207px;animation-duration:34s;animation-direction:reverse}
 .orb2::after{background:var(--vi);box-shadow:0 0 14px var(--vi)}
-.orb3{width:410px;height:410px;margin-left:-205px;animation-duration:46s;opacity:.55}
+.orb3{width:512px;height:512px;margin-left:-256px;animation-duration:46s;opacity:.55}
 .orb3::after{background:var(--pk);box-shadow:0 0 14px var(--pk);width:5px;height:5px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.portal{position:absolute;bottom:56px;left:50%;transform:translateX(-50%);
-  width:290px;height:290px;border-radius:50%;pointer-events:none;
+@keyframes spin{from{transform:translate(0,-50%) rotate(0)}to{transform:translate(0,-50%) rotate(360deg)}}
+.portal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:400px;height:400px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle at 50% 45%,rgba(34,211,238,.2),rgba(129,140,248,.13) 45%,transparent 72%);
   filter:blur(2px)}
 /* the photo sits in a blob whose shape morphs, with a ring and gradient layer
    morphing in step behind it. Two shots crossfade on hover. */
-.figure{position:relative;z-index:2;width:min(322px,84%);aspect-ratio:880/1048;
+.figure{position:relative;z-index:2;width:min(408px,90%);aspect-ratio:880/1048;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
   opacity:0;transform:translateY(58px) scale(.96);
   transition:opacity .9s cubic-bezier(.22,1,.36,1),transform 1.05s cubic-bezier(.22,1,.36,1)}
@@ -141,13 +141,21 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .figure:hover .fig-b,.figure.flip .fig-b{opacity:1;transform:none}
 /* floating pins */
 @keyframes pinFloat{50%{transform:translateY(-9px)}}
-.pin{position:absolute;z-index:4;white-space:nowrap;font-family:'JetBrains Mono',monospace;
-  font-size:.63rem;font-weight:500;letter-spacing:.09em;padding:7px 13px;border-radius:100px;
-  background:rgba(11,16,34,.92);border:1px solid var(--line);color:var(--txt);
-  box-shadow:0 10px 26px rgba(0,0,0,.5);backdrop-filter:blur(8px);
+.pin{position:absolute;z-index:4;white-space:nowrap;display:grid;
+  grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;
+  padding:10px 15px;border-radius:14px;
+  background:rgba(11,16,34,.93);border:1px solid var(--line);
+  box-shadow:0 14px 32px rgba(0,0,0,.55);backdrop-filter:blur(9px);
   animation:pinFloat 3.6s ease-in-out infinite}
-.pin-1{top:9%;left:-26px;color:#ffd479;border-color:rgba(255,212,121,.3)}
-.pin-2{bottom:15%;right:-22px;color:var(--cy);border-color:var(--line-hi);animation-delay:-1.8s}
+.pin i{grid-row:1/3;align-self:center;font-style:normal;font-size:1.16rem;line-height:1}
+.pin b{font-size:.775rem;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.pin small{font-family:'JetBrains Mono',monospace;font-size:.585rem;font-weight:500;
+  letter-spacing:.05em;color:var(--faint);line-height:1.3}
+.pin-1{top:7%;left:-52px}
+.pin-1 b{color:#ffd479}
+.pin-1{border-color:rgba(255,212,121,.28)}
+.pin-2{bottom:12%;right:-48px;border-color:var(--line-hi);animation-delay:-1.8s}
+.pin-2 b{color:var(--cy)}
 .fig-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:3;
   font-family:'JetBrains Mono',monospace;font-size:.63rem;font-weight:500;letter-spacing:.24em;
   color:var(--faint);opacity:.72;transition:opacity .3s;pointer-events:none}
@@ -483,11 +491,12 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 @media(max-width:900px){
   .hero-top,.about,.research{grid-template-columns:1fr}
   .ly-col{position:static;top:auto;margin-top:12px}
-  .orbit-wrap{order:-1;min-height:420px}
-  .figure{width:min(266px,70%)}
-  .orb1{width:210px;height:210px;margin-left:-105px}.orb2{width:272px;height:272px;margin-left:-136px}.orb3{width:334px;height:334px;margin-left:-167px}
-  .portal{width:238px;height:238px}
-  .pin{font-size:.58rem;padding:6px 11px}.pin-1{left:-12px}.pin-2{right:-10px}
+  .orbit-wrap{order:-1;min-height:470px}
+  .figure{width:min(310px,78%)}
+  .orb1{width:250px;height:250px;margin-left:-125px}.orb2{width:322px;height:322px;margin-left:-161px}.orb3{width:394px;height:394px;margin-left:-197px}
+  .portal{width:300px;height:300px}
+  .pin{padding:8px 12px}.pin b{font-size:.715rem}.pin small{font-size:.545rem}
+  .pin-1{left:-16px}.pin-2{right:-14px}
   .nav-links{position:fixed;inset:56px 0 auto;flex-direction:column;background:rgba(4,5,13,.97);
     padding:22px 26px;gap:16px;border-bottom:1px solid var(--line);display:none}
   .nav-links.open{display:flex}
@@ -560,8 +569,8 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
           <img class="fig-a" src="assets/hero-a.jpg" alt="Nikkat Afrin" width="880" height="1048" decoding="async">
           <img class="fig-b" src="assets/hero-b.jpg" alt="Nikkat Afrin at her Yeshiva University graduation" width="880" height="1048" loading="lazy" decoding="async">
         </div>
-        <span class="pin pin-1">★ IEEE IJCNN 2025</span>
-        <span class="pin pin-2">93% accuracy</span>
+        <span class="pin pin-1"><i>★</i><b>IEEE IJCNN 2025</b><small>First author · SigmaCam</small></span>
+        <span class="pin pin-2"><i>🤖</i><b>AI &amp; LLMs</b><small>RAG · GPT-4o · Whisper</small></span>
       </div>
       <span class="fig-hint">HOVER ME</span>
     </div>
