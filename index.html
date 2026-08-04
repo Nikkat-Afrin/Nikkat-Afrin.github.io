@@ -22,8 +22,8 @@
 :root{
   --bg:#04050d; --bg2:#070a18; --panel:rgba(14,20,42,.55); --panel-solid:#0b1022;
   --line:rgba(120,160,255,.16); --line-hi:rgba(34,211,238,.45);
-  --txt:#dbe6f5; --dim:#8fa3c4; --faint:#5e719a;
-  --cy:#22d3ee; --vi:#a78bfa; --pk:#f0abfc; --star:#eaf4ff;
+  --txt:#eaf1fc; --dim:#c3d1e8; --faint:#9db0d0;
+  --cy:#3ddcf5; --vi:#bda6ff; --pk:#f5c2ff; --star:#ffffff;
   --grad:linear-gradient(100deg,#22d3ee 0%,#818cf8 45%,#e879f9 100%);
   --max:1180px;
 }
@@ -65,10 +65,10 @@ nav.on{border-bottom-color:var(--line);background:rgba(4,5,13,.9)}
 
 /* ---------- layout ---------- */
 section{max-width:var(--max);margin:0 auto;padding:112px 26px}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.73rem;letter-spacing:.34em;
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:500;letter-spacing:.34em;
   color:var(--cy);text-transform:uppercase;margin-bottom:14px}
 h2.sec{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:700;letter-spacing:-.02em;margin-bottom:16px;line-height:1.15}
-.sec-sub{color:var(--dim);max-width:660px;margin-bottom:46px;font-size:1.01rem}
+.sec-sub{color:var(--dim);max-width:680px;margin-bottom:46px;font-size:1.04rem}
 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ---------- hero ---------- */
@@ -81,7 +81,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .rot{font-family:'JetBrains Mono',monospace;color:var(--cy)}
 .cursor{display:inline-block;width:2px;height:1.05em;background:var(--cy);vertical-align:-.16em;animation:bl 1s steps(2) infinite}
 @keyframes bl{50%{opacity:0}}
-.blurb{color:var(--dim);max-width:600px;font-size:1.045rem;margin-bottom:32px}
+.blurb{color:var(--dim);max-width:600px;font-size:1.06rem;margin-bottom:32px}
 .blurb b{color:var(--star);font-weight:600}
 .btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:100px;
@@ -95,7 +95,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
   text-align:center;backdrop-filter:blur(9px);transition:.3s}
 .stat:hover{border-color:var(--line-hi);transform:translateY(-3px)}
 .stat b{display:block;font-size:1.85rem;font-weight:700;line-height:1;letter-spacing:-.02em;margin-bottom:8px}
-.stat span{font-size:.665rem;color:var(--faint);letter-spacing:.11em;text-transform:uppercase;
+.stat span{font-size:.685rem;color:var(--faint);font-weight:500;letter-spacing:.11em;text-transform:uppercase;
   font-family:'JetBrains Mono',monospace;line-height:1.35;display:block}
 
 /* avatar / orbit */
@@ -128,15 +128,65 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .card:hover::before{opacity:.85}
 
 /* about */
-.about{display:grid;grid-template-columns:1fr .82fr;gap:54px;align-items:start}
-.about p{color:var(--dim);margin-bottom:17px}
+.about{display:grid;grid-template-columns:1fr 300px;gap:54px;align-items:start}
+.about p{color:var(--dim);margin-bottom:17px;font-size:1.035rem}
 .about p b{color:var(--star);font-weight:600}
-.facts{display:grid;gap:13px}
+/* ---------- hanging ID badge ---------- */
+.ly-col{display:flex;flex-direction:column;align-items:center;position:sticky;top:110px}
+.lanyard{position:relative;width:100%;display:flex;justify-content:center;
+  transform:translateY(-56px);opacity:0;transition:transform .8s cubic-bezier(.18,1.06,.4,1),opacity .5s}
+.lanyard.drop{transform:translateY(0);opacity:1}
+.ly-hook{width:52px;height:9px;border-radius:0 0 9px 9px;background:linear-gradient(#243154,#121a30);
+  border:1px solid var(--line);border-top:0;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:3}
+.ly-swing{transform-origin:50% 0;will-change:transform;display:flex;flex-direction:column;align-items:center;
+  padding-top:8px;cursor:grab}
+.ly-swing.grabbing{cursor:grabbing}
+.ly-strap{width:34px;height:118px;border-radius:3px;overflow:hidden;position:relative;
+  background:linear-gradient(90deg,#0d7490,#22d3ee 32%,#818cf8 68%,#5b3fa8);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 4px 16px rgba(34,211,238,.16)}
+.ly-strap span{position:absolute;top:50%;left:50%;white-space:nowrap;
+  transform:translate(-50%,-50%) rotate(90deg);font-family:'JetBrains Mono',monospace;
+  font-size:.5rem;font-weight:500;letter-spacing:.24em;color:rgba(4,8,22,.62)}
+.ly-clip{width:44px;height:16px;margin-top:-3px;border-radius:4px;
+  background:linear-gradient(#e2e8f4,#9aa7bd 60%,#68758c);
+  box-shadow:0 2px 7px rgba(0,0,0,.5);position:relative;z-index:2}
+.ly-clip::after{content:'';position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);
+  width:14px;height:7px;border-radius:0 0 4px 4px;background:#7d8a9f}
+.ly-card{width:246px;padding:26px 22px 20px;margin-top:-2px;border-radius:17px;text-align:center;
+  background:linear-gradient(168deg,#141d3c 0%,#0b1226 58%,#141033 100%);
+  border:1px solid rgba(140,175,255,.24);
+  box-shadow:0 26px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.09);
+  position:relative;overflow:hidden;user-select:none}
+.ly-card::before{content:'';position:absolute;top:-60%;left:-30%;width:80%;height:220%;
+  background:linear-gradient(90deg,transparent,rgba(190,220,255,.11),transparent);transform:rotate(18deg)}
+.ly-hole{width:52px;height:8px;border-radius:20px;background:#04050d;margin:0 auto 15px;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.09)}
+.ly-top{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:15px}
+.ly-org{font-family:'JetBrains Mono',monospace;font-size:.575rem;font-weight:500;letter-spacing:.2em;color:var(--cy)}
+.ly-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80}
+.ly-photo{width:126px;height:126px;margin:0 auto 16px;border-radius:50%;overflow:hidden;
+  border:1px solid var(--line-hi);box-shadow:0 0 30px rgba(34,211,238,.2)}
+.ly-photo img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.ly-name{font-size:1.16rem;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.ly-role{font-size:.79rem;color:var(--dim);margin-top:4px;line-height:1.35}
+.ly-meta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:.56rem;font-weight:500;letter-spacing:.11em;color:var(--faint)}
+.ly-bars{height:26px;margin-top:16px;border-radius:3px;opacity:.62;
+  background:repeating-linear-gradient(90deg,#dbe7fb 0 2px,transparent 2px 4px,#dbe7fb 4px 5px,
+    transparent 5px 9px,#dbe7fb 9px 12px,transparent 12px 14px)}
+.ly-hint{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.19em;
+  color:var(--faint);margin-top:20px;text-transform:uppercase;opacity:.75}
+@media(hover:none){.ly-hint{display:none}}
+@media(prefers-reduced-motion:reduce){
+  .lanyard{transform:none!important;opacity:1!important;transition:none}
+  .ly-swing{transform:none!important}
+}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:13px;margin-top:52px}
 .fact{display:flex;gap:14px;align-items:flex-start;padding:15px 17px;border-radius:12px;
   background:rgba(12,18,38,.5);border:1px solid var(--line);font-size:.9rem}
 .fact i{font-style:normal;font-size:1.15rem;line-height:1}
-.fact b{display:block;color:var(--star);font-size:.87rem;margin-bottom:2px}
-.fact span{color:var(--dim);font-size:.84rem}
+.fact b{display:block;color:var(--star);font-size:.895rem;margin-bottom:2px}
+.fact span{color:var(--dim);font-size:.875rem}
 
 /* research */
 .research{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}
@@ -160,12 +210,12 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 @media(max-width:700px){.figs{grid-template-columns:1fr}}
 .mini-stats{display:flex;gap:26px;flex-wrap:wrap;margin:18px 0}
 .mini-stats div b{display:block;font-size:1.28rem;color:var(--cy);line-height:1.1}
-.mini-stats div span{font-size:.72rem;color:var(--faint);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.mini-stats div span{font-size:.745rem;font-weight:500;color:var(--faint);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
 
 /* tags + links */
 .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
 .tag{font-family:'JetBrains Mono',monospace;font-size:.685rem;padding:4px 10px;border-radius:6px;
-  background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.18);color:#9fdff0;letter-spacing:.03em}
+  background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.18);color:#c6effa;font-weight:500;letter-spacing:.03em}
 .links{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}
 .lnk{color:var(--cy);text-decoration:none;font-size:.855rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:.24s}
 .lnk:hover{color:var(--star);gap:10px}
@@ -194,7 +244,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .aw-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.13em;
   text-transform:uppercase;color:var(--cy);margin-bottom:5px}
 .aw-title{font-size:1rem;font-weight:700;color:var(--star);line-height:1.32}
-.aw-org{color:var(--faint);font-size:.79rem;margin-top:4px}
+.aw-org{color:var(--faint);font-size:.815rem;font-weight:500;margin-top:4px}
 .aw-hint{position:absolute;top:13px;right:14px;font-family:'JetBrains Mono',monospace;font-size:.58rem;
   letter-spacing:.1em;color:#a8c3e0;background:rgba(4,10,22,.72);border:1px solid rgba(160,200,255,.28);
   border-radius:100px;padding:3px 9px;backdrop-filter:blur(4px)}
@@ -232,7 +282,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .xp-meta{flex:1;min-width:0}
 .xp-role{font-size:1.14rem;font-weight:700;color:var(--star);line-height:1.3;margin-bottom:3px}
 .xp-org{color:var(--vi);font-size:.94rem;font-weight:600}
-.xp-loc{color:var(--faint);font-size:.83rem;margin-top:3px}
+.xp-loc{color:var(--faint);font-size:.85rem;font-weight:500;margin-top:3px}
 .xp-right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
 .xp-when{font-family:'JetBrains Mono',monospace;font-size:.735rem;color:var(--cy);letter-spacing:.06em;white-space:nowrap}
 .xp-kind{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.11em;text-transform:uppercase;
@@ -315,7 +365,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 /* dashboards */
 .dash-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
 .dframe{width:100%;height:560px;border:1px solid var(--line);border-radius:14px;background:#0b1022}
-.dnote{color:var(--faint);font-size:.82rem;margin-top:12px;font-family:'JetBrains Mono',monospace}
+.dnote{color:var(--faint);font-size:.845rem;font-weight:500;margin-top:12px;font-family:'JetBrains Mono',monospace}
 
 /* skills */
 .sk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
@@ -326,7 +376,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .sk-ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;
   background:rgba(34,211,238,.1);border:1px solid var(--line-hi)}
 .sk-head h4{font-size:1rem;font-weight:700;color:var(--star)}
-.sk-head small{display:block;color:var(--faint);font-size:.75rem;font-weight:400}
+.sk-head small{display:block;color:var(--faint);font-size:.785rem;font-weight:500}
 
 /* github stats */
 .badges{display:flex;gap:10px;flex-wrap:wrap}
@@ -338,14 +388,14 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .contact{max-width:660px;margin:0 auto;text-align:center}
 form{display:grid;gap:14px;margin-top:32px;text-align:left}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.11em;color:var(--faint);
+label{font-family:'JetBrains Mono',monospace;font-size:.745rem;font-weight:500;letter-spacing:.11em;color:var(--faint);
   text-transform:uppercase;display:block;margin-bottom:6px}
 input,textarea{width:100%;background:rgba(10,15,32,.7);border:1px solid var(--line);border-radius:10px;
   padding:12px 14px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:.93rem;transition:.24s}
 input:focus,textarea:focus{outline:none;border-color:var(--cy);box-shadow:0 0 0 3px rgba(34,211,238,.1)}
 textarea{resize:vertical;min-height:118px}
 .socials{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
-footer{border-top:1px solid var(--line);padding:34px 26px;text-align:center;color:var(--faint);font-size:.83rem}
+footer{border-top:1px solid var(--line);padding:34px 26px;text-align:center;color:var(--faint);font-size:.865rem;font-weight:500}
 footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
 
@@ -389,6 +439,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
 @media(max-width:900px){
   .hero-top,.about,.research{grid-template-columns:1fr}
+  .ly-col{position:static;top:auto;margin-top:12px}
   .orbit-wrap{order:-1;min-height:250px}
   .nav-links{position:fixed;inset:56px 0 auto;flex-direction:column;background:rgba(4,5,13,.97);
     padding:22px 26px;gap:16px;border-bottom:1px solid var(--line);display:none}
@@ -499,7 +550,39 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
         refusing to dress up a number that doesn't mean anything.
       </p>
     </div>
-    <div class="facts rv">
+
+    <div class="ly-col">
+      <div class="lanyard" id="lanyard">
+        <div class="ly-hook"></div>
+        <div class="ly-swing" id="lySwing">
+          <div class="ly-strap">
+            <span>NIKKAT AFRIN · AI &amp; DATA · NIKKAT AFRIN · AI &amp; DATA</span>
+          </div>
+          <div class="ly-clip"></div>
+          <div class="ly-card">
+            <div class="ly-hole"></div>
+            <div class="ly-top">
+              <span class="ly-org">PEBLINK · WLRC</span>
+              <span class="ly-dot"></span>
+            </div>
+            <div class="ly-photo">
+              <img src="assets/nikkat.jpg" alt="Nikkat Afrin" width="150" height="150" loading="lazy" decoding="async">
+            </div>
+            <div class="ly-name">Nikkat Afrin</div>
+            <div class="ly-role">AI &amp; Data Platform Engineer</div>
+            <div class="ly-meta">
+              <span>NEW YORK, USA</span>
+              <span>IEEE IJCNN '25</span>
+            </div>
+            <div class="ly-bars" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <p class="ly-hint">↔ drag the card</p>
+    </div>
+  </div>
+
+  <div class="facts rv">
       <div class="fact"><i>🛰️</i><div><b>Currently</b><span>Data &amp; AI Platform Engineer @ Peblink / WLRC</span></div></div>
       <div class="fact"><i>🎓</i><div><b>Education</b><span>M.S. Data Analytics &amp; Visualization, Yeshiva University — GPA 3.95</span></div></div>
       <div class="fact"><i>🥇</i><div><b>Undergraduate</b><span>B.C.A., Andhra University — Gold Medalist, 4.0/4.0</span></div></div>
@@ -507,7 +590,6 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       <div class="fact"><i>📄</i><div><b>Research</b><span>IEEE IJCNN 2025 — first author</span></div></div>
       <div class="fact"><i>📍</i><div><b>Based in</b><span>New York, USA</span></div></div>
       <div class="fact"><i>🎨</i><div><b>Away from the keyboard</b><span>Sand painting &amp; cooking — same instinct, different medium</span></div></div>
-    </div>
   </div>
 </section>
 
@@ -1205,6 +1287,81 @@ function wireGifs(){
   });
 }
 
+/* ---------------- hanging ID badge: pendulum physics ----------------
+   The badge swings on a damped pendulum. Scrolling gives it a sideways
+   kick, dragging sets the angle directly, and gravity settles it back. */
+(function(){
+  const wrap=document.getElementById('lanyard'), swing=document.getElementById('lySwing');
+  if(!wrap||!swing)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ wrap.classList.add('drop'); return; }
+
+  let a=0,      // angle, radians
+      v=0,      // angular velocity
+      dragging=false, pivot=0, lastPx=0, lastT=0, running=false, dropped=false;
+  const GRAV=26, DAMP=0.985, MAXV=7, MAXA=0.85;
+
+  function frame(){
+    if(!dragging){
+      v += -GRAV*Math.sin(a)*(1/60);
+      v *= DAMP;
+      if(v> MAXV)v= MAXV; if(v<-MAXV)v=-MAXV;
+      a += v*(1/60);
+      if(a> MAXA){a= MAXA;v*=-.4} if(a<-MAXA){a=-MAXA;v*=-.4}
+    }
+    // the card lags the strap slightly, which reads as weight
+    swing.style.transform='rotate('+a.toFixed(4)+'rad)';
+    if(Math.abs(a)<0.0012 && Math.abs(v)<0.0025 && !dragging){ running=false; swing.style.transform='rotate(0rad)'; return; }
+    requestAnimationFrame(frame);
+  }
+  function kick(){ if(!running){running=true;requestAnimationFrame(frame);} }
+
+  /* drop in the first time it scrolls into view, with a push to start the swing */
+  new IntersectionObserver((es,ob)=>{
+    es.forEach(e=>{
+      if(e.isIntersecting && !dropped){
+        dropped=true; wrap.classList.add('drop');
+        setTimeout(()=>{ v=1.15; kick(); },140);
+        ob.disconnect();
+      }
+    });
+  },{threshold:.35}).observe(wrap);
+
+  /* scrolling nudges it, so it's alive the whole time the section is on screen */
+  let prevY=scrollY;
+  addEventListener('scroll',()=>{
+    const d=scrollY-prevY; prevY=scrollY;
+    if(!dropped||dragging)return;
+    const r=wrap.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight)return;
+    v += Math.max(-0.05,Math.min(0.05,d*0.0022));
+    kick();
+  },{passive:true});
+
+  /* drag to swing it yourself */
+  function angleFrom(px){
+    const r=swing.getBoundingClientRect();
+    return Math.max(-MAXA,Math.min(MAXA,Math.atan2(px-pivot,r.height*0.82)));
+  }
+  swing.addEventListener('pointerdown',e=>{
+    dragging=true; swing.classList.add('grabbing');
+    pivot=swing.getBoundingClientRect().left+swing.offsetWidth/2;
+    lastPx=e.clientX; lastT=performance.now();
+    swing.setPointerCapture(e.pointerId); kick();
+  });
+  swing.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    e.preventDefault();
+    const now=performance.now(), dt=Math.max(8,now-lastT);
+    const prev=a; a=angleFrom(e.clientX);
+    v=(a-prev)/(dt/1000)*0.55;
+    lastPx=e.clientX; lastT=now;
+  });
+  function release(){ if(!dragging)return; dragging=false; swing.classList.remove('grabbing'); kick(); }
+  swing.addEventListener('pointerup',release);
+  swing.addEventListener('pointercancel',release);
+  swing.addEventListener('dragstart',e=>e.preventDefault());
+})();
+
 /* research figures: same lazy hover-to-play behaviour */
 document.querySelectorAll('.figw').forEach(w=>{
   const v=w.querySelector('video.figv'); if(!v)return;
@@ -1338,6 +1495,6 @@ document.getElementById('cform').addEventListener('submit',function(){
   b.textContent='Sending…'; b.disabled=true;
 });
 </script>
-<script src="assets/js/assistant.js?v=7" defer></script>
+<script src="assets/js/assistant.js?v=8" defer></script>
 </body>
 </html>
