@@ -228,6 +228,34 @@ textarea{resize:vertical;min-height:118px}
 footer{border-top:1px solid var(--line);padding:34px 26px;text-align:center;color:var(--faint);font-size:.83rem}
 footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
+
+/* ---------- galleries ---------- */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:12px}
+.gitem{padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:zoom-in;
+  background:var(--panel-solid);aspect-ratio:1;position:relative;transition:.3s;display:block}
+.gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.gitem:hover{border-color:var(--line-hi);transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.45)}
+.gitem:hover img{transform:scale(1.08)}
+.gitem:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.gh-more{display:none}
+.gal.open .gh-more{display:block}
+.gal-more{display:flex;justify-content:center;margin-top:22px}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(3,4,10,.94);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:26px}
+.lb.on{display:flex}
+.lb img{max-width:92vw;max-height:84vh;border-radius:12px;border:1px solid var(--line-hi);
+  box-shadow:0 24px 70px rgba(0,0,0,.7)}
+.lb-x,.lb-p,.lb-n{position:absolute;background:rgba(12,18,38,.8);border:1px solid var(--line);
+  color:var(--star);width:46px;height:46px;border-radius:50%;font-size:1.3rem;cursor:pointer;
+  display:grid;place-items:center;transition:.25s}
+.lb-x:hover,.lb-p:hover,.lb-n:hover{border-color:var(--cy);color:var(--cy)}
+.lb-x{top:22px;right:22px} .lb-p{left:22px} .lb-n{right:22px}
+.lb-c{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)}
+@media(max-width:640px){.gal{grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:9px}
+  .lb-p,.lb-n{width:40px;height:40px}.lb-p{left:8px}.lb-n{right:8px}}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
 .rv.in{opacity:1;transform:none}
@@ -267,6 +295,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       <a href="#work">Projects</a>
       <a href="#dashboards">Dashboards</a>
       <a href="#skills">Skills</a>
+      <a href="#art">Art</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </div>
   </div>
@@ -612,25 +641,166 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <section id="beyond">
   <div class="rv">
     <div class="eyebrow">09 / Off-screen</div>
-    <h2 class="sec">A few <span class="grad">moments</span></h2>
-    <p class="sec-sub">Research that left the lab, and the degree that started it.</p>
+    <h2 class="sec">Beyond the <span class="grad">terminal</span></h2>
+    <p class="sec-sub">
+      I cook and I paint with sand. It's the same instinct as engineering, honestly — take raw,
+      messy pieces and turn them into something meaningful.
+    </p>
   </div>
   <div class="beyond rv">
-    <figure class="bimg"><img src="assets/moment-capitol.jpg" alt="Nikkat Afrin at the US Capitol, Washington D.C." loading="lazy"></figure>
+    <figure class="bimg"><img src="assets/moment-capitol.jpg" alt="At the US Capitol, Washington D.C." loading="lazy"></figure>
     <figure class="bimg"><img src="assets/moment-capitol2.jpg" alt="Washington D.C. — Capitol grounds" loading="lazy"></figure>
     <figure class="bimg"><img src="assets/moment-grad.jpg" alt="Graduation, New York City" loading="lazy"></figure>
     <figure class="bimg"><img src="assets/moment-grad2.jpg" alt="Graduation above the Manhattan skyline" loading="lazy"></figure>
   </div>
-  <p class="dnote" style="margin-top:16px">
-    ▸ Washington, D.C. — translating WLRC literacy findings into product requirements for a
-    meeting with Congressman Brad Schneider · M.S. graduation, New York
+  <p class="dnote" style="margin-top:14px">
+    ▸ Washington, D.C. — turning WLRC literacy findings into product requirements for a meeting
+    with Congressman Brad Schneider · M.S. graduation, New York
   </p>
+</section>
+
+<!-- ================= SAND & CANVAS ================= -->
+<section id="art">
+  <div class="rv">
+    <div class="eyebrow">10 / Sand &amp; Canvas</div>
+    <h2 class="sec">Sand <span class="grad">paintings</span></h2>
+    <p class="sec-sub">
+      Built up in layers of coloured sand and acrylic — texture you can feel from across a room.
+      12 pieces. Click any to open it full size.
+    </p>
+  </div>
+  <div class="gal rv" id="galArt">
+      <button class="gitem" data-full="assets/art/art-02.jpg" data-i="0" aria-label="Sand painting 1"><img src="assets/art/art-02-t.jpg" alt="Sand painting 1" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-01.jpg" data-i="1" aria-label="Sand painting 2"><img src="assets/art/art-01-t.jpg" alt="Sand painting 2" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-04.jpg" data-i="2" aria-label="Sand painting 3"><img src="assets/art/art-04-t.jpg" alt="Sand painting 3" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-05.jpg" data-i="3" aria-label="Sand painting 4"><img src="assets/art/art-05-t.jpg" alt="Sand painting 4" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-06.jpg" data-i="4" aria-label="Sand painting 5"><img src="assets/art/art-06-t.jpg" alt="Sand painting 5" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-12.jpg" data-i="5" aria-label="Sand painting 6"><img src="assets/art/art-12-t.jpg" alt="Sand painting 6" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-09.jpg" data-i="6" aria-label="Sand painting 7"><img src="assets/art/art-09-t.jpg" alt="Sand painting 7" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/art/art-08.jpg" data-i="7" aria-label="Sand painting 8"><img src="assets/art/art-08-t.jpg" alt="Sand painting 8" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/art/art-03.jpg" data-i="8" aria-label="Sand painting 9"><img src="assets/art/art-03-t.jpg" alt="Sand painting 9" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/art/art-07.jpg" data-i="9" aria-label="Sand painting 10"><img src="assets/art/art-07-t.jpg" alt="Sand painting 10" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/art/art-10.jpg" data-i="10" aria-label="Sand painting 11"><img src="assets/art/art-10-t.jpg" alt="Sand painting 11" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/art/art-11.jpg" data-i="11" aria-label="Sand painting 12"><img src="assets/art/art-11-t.jpg" alt="Sand painting 12" loading="lazy" decoding="async"></button>
+  </div>
+  <div class="gal-more rv"><button class="btn btn-g" data-gal="galArt" data-total="12">Show all 12 pieces ↓</button></div>
+</section>
+
+<!-- ================= KITCHEN ================= -->
+<section id="kitchen">
+  <div class="rv">
+    <div class="eyebrow">11 / Kitchen</div>
+    <h2 class="sec">Things I've <span class="grad">cooked</span></h2>
+    <p class="sec-sub">
+      Mostly South Indian home cooking, plus whatever I felt like attempting that week.
+      96 dishes. Click any to open it full size.
+    </p>
+  </div>
+  <div class="gal rv" id="galFood">
+      <button class="gitem" data-full="assets/food/food-59.jpg" data-i="0" aria-label="Dish 1"><img src="assets/food/food-59-t.jpg" alt="Dish 1" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-60.jpg" data-i="1" aria-label="Dish 2"><img src="assets/food/food-60-t.jpg" alt="Dish 2" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-41.jpg" data-i="2" aria-label="Dish 3"><img src="assets/food/food-41-t.jpg" alt="Dish 3" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-20.jpg" data-i="3" aria-label="Dish 4"><img src="assets/food/food-20-t.jpg" alt="Dish 4" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-26.jpg" data-i="4" aria-label="Dish 5"><img src="assets/food/food-26-t.jpg" alt="Dish 5" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-05.jpg" data-i="5" aria-label="Dish 6"><img src="assets/food/food-05-t.jpg" alt="Dish 6" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-51.jpg" data-i="6" aria-label="Dish 7"><img src="assets/food/food-51-t.jpg" alt="Dish 7" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-71.jpg" data-i="7" aria-label="Dish 8"><img src="assets/food/food-71-t.jpg" alt="Dish 8" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-77.jpg" data-i="8" aria-label="Dish 9"><img src="assets/food/food-77-t.jpg" alt="Dish 9" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-78.jpg" data-i="9" aria-label="Dish 10"><img src="assets/food/food-78-t.jpg" alt="Dish 10" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-89.jpg" data-i="10" aria-label="Dish 11"><img src="assets/food/food-89-t.jpg" alt="Dish 11" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-93.jpg" data-i="11" aria-label="Dish 12"><img src="assets/food/food-93-t.jpg" alt="Dish 12" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-94.jpg" data-i="12" aria-label="Dish 13"><img src="assets/food/food-94-t.jpg" alt="Dish 13" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-95.jpg" data-i="13" aria-label="Dish 14"><img src="assets/food/food-95-t.jpg" alt="Dish 14" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-42.jpg" data-i="14" aria-label="Dish 15"><img src="assets/food/food-42-t.jpg" alt="Dish 15" loading="lazy" decoding="async"></button>
+      <button class="gitem" data-full="assets/food/food-33.jpg" data-i="15" aria-label="Dish 16"><img src="assets/food/food-33-t.jpg" alt="Dish 16" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-01.jpg" data-i="16" aria-label="Dish 17"><img src="assets/food/food-01-t.jpg" alt="Dish 17" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-02.jpg" data-i="17" aria-label="Dish 18"><img src="assets/food/food-02-t.jpg" alt="Dish 18" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-03.jpg" data-i="18" aria-label="Dish 19"><img src="assets/food/food-03-t.jpg" alt="Dish 19" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-04.jpg" data-i="19" aria-label="Dish 20"><img src="assets/food/food-04-t.jpg" alt="Dish 20" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-06.jpg" data-i="20" aria-label="Dish 21"><img src="assets/food/food-06-t.jpg" alt="Dish 21" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-07.jpg" data-i="21" aria-label="Dish 22"><img src="assets/food/food-07-t.jpg" alt="Dish 22" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-08.jpg" data-i="22" aria-label="Dish 23"><img src="assets/food/food-08-t.jpg" alt="Dish 23" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-09.jpg" data-i="23" aria-label="Dish 24"><img src="assets/food/food-09-t.jpg" alt="Dish 24" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-10.jpg" data-i="24" aria-label="Dish 25"><img src="assets/food/food-10-t.jpg" alt="Dish 25" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-11.jpg" data-i="25" aria-label="Dish 26"><img src="assets/food/food-11-t.jpg" alt="Dish 26" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-12.jpg" data-i="26" aria-label="Dish 27"><img src="assets/food/food-12-t.jpg" alt="Dish 27" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-13.jpg" data-i="27" aria-label="Dish 28"><img src="assets/food/food-13-t.jpg" alt="Dish 28" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-14.jpg" data-i="28" aria-label="Dish 29"><img src="assets/food/food-14-t.jpg" alt="Dish 29" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-15.jpg" data-i="29" aria-label="Dish 30"><img src="assets/food/food-15-t.jpg" alt="Dish 30" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-16.jpg" data-i="30" aria-label="Dish 31"><img src="assets/food/food-16-t.jpg" alt="Dish 31" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-17.jpg" data-i="31" aria-label="Dish 32"><img src="assets/food/food-17-t.jpg" alt="Dish 32" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-18.jpg" data-i="32" aria-label="Dish 33"><img src="assets/food/food-18-t.jpg" alt="Dish 33" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-19.jpg" data-i="33" aria-label="Dish 34"><img src="assets/food/food-19-t.jpg" alt="Dish 34" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-21.jpg" data-i="34" aria-label="Dish 35"><img src="assets/food/food-21-t.jpg" alt="Dish 35" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-22.jpg" data-i="35" aria-label="Dish 36"><img src="assets/food/food-22-t.jpg" alt="Dish 36" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-23.jpg" data-i="36" aria-label="Dish 37"><img src="assets/food/food-23-t.jpg" alt="Dish 37" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-24.jpg" data-i="37" aria-label="Dish 38"><img src="assets/food/food-24-t.jpg" alt="Dish 38" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-25.jpg" data-i="38" aria-label="Dish 39"><img src="assets/food/food-25-t.jpg" alt="Dish 39" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-27.jpg" data-i="39" aria-label="Dish 40"><img src="assets/food/food-27-t.jpg" alt="Dish 40" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-28.jpg" data-i="40" aria-label="Dish 41"><img src="assets/food/food-28-t.jpg" alt="Dish 41" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-29.jpg" data-i="41" aria-label="Dish 42"><img src="assets/food/food-29-t.jpg" alt="Dish 42" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-30.jpg" data-i="42" aria-label="Dish 43"><img src="assets/food/food-30-t.jpg" alt="Dish 43" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-31.jpg" data-i="43" aria-label="Dish 44"><img src="assets/food/food-31-t.jpg" alt="Dish 44" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-32.jpg" data-i="44" aria-label="Dish 45"><img src="assets/food/food-32-t.jpg" alt="Dish 45" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-34.jpg" data-i="45" aria-label="Dish 46"><img src="assets/food/food-34-t.jpg" alt="Dish 46" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-35.jpg" data-i="46" aria-label="Dish 47"><img src="assets/food/food-35-t.jpg" alt="Dish 47" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-36.jpg" data-i="47" aria-label="Dish 48"><img src="assets/food/food-36-t.jpg" alt="Dish 48" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-37.jpg" data-i="48" aria-label="Dish 49"><img src="assets/food/food-37-t.jpg" alt="Dish 49" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-38.jpg" data-i="49" aria-label="Dish 50"><img src="assets/food/food-38-t.jpg" alt="Dish 50" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-39.jpg" data-i="50" aria-label="Dish 51"><img src="assets/food/food-39-t.jpg" alt="Dish 51" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-40.jpg" data-i="51" aria-label="Dish 52"><img src="assets/food/food-40-t.jpg" alt="Dish 52" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-43.jpg" data-i="52" aria-label="Dish 53"><img src="assets/food/food-43-t.jpg" alt="Dish 53" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-44.jpg" data-i="53" aria-label="Dish 54"><img src="assets/food/food-44-t.jpg" alt="Dish 54" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-45.jpg" data-i="54" aria-label="Dish 55"><img src="assets/food/food-45-t.jpg" alt="Dish 55" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-46.jpg" data-i="55" aria-label="Dish 56"><img src="assets/food/food-46-t.jpg" alt="Dish 56" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-47.jpg" data-i="56" aria-label="Dish 57"><img src="assets/food/food-47-t.jpg" alt="Dish 57" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-48.jpg" data-i="57" aria-label="Dish 58"><img src="assets/food/food-48-t.jpg" alt="Dish 58" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-49.jpg" data-i="58" aria-label="Dish 59"><img src="assets/food/food-49-t.jpg" alt="Dish 59" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-50.jpg" data-i="59" aria-label="Dish 60"><img src="assets/food/food-50-t.jpg" alt="Dish 60" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-52.jpg" data-i="60" aria-label="Dish 61"><img src="assets/food/food-52-t.jpg" alt="Dish 61" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-53.jpg" data-i="61" aria-label="Dish 62"><img src="assets/food/food-53-t.jpg" alt="Dish 62" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-54.jpg" data-i="62" aria-label="Dish 63"><img src="assets/food/food-54-t.jpg" alt="Dish 63" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-55.jpg" data-i="63" aria-label="Dish 64"><img src="assets/food/food-55-t.jpg" alt="Dish 64" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-56.jpg" data-i="64" aria-label="Dish 65"><img src="assets/food/food-56-t.jpg" alt="Dish 65" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-57.jpg" data-i="65" aria-label="Dish 66"><img src="assets/food/food-57-t.jpg" alt="Dish 66" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-58.jpg" data-i="66" aria-label="Dish 67"><img src="assets/food/food-58-t.jpg" alt="Dish 67" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-61.jpg" data-i="67" aria-label="Dish 68"><img src="assets/food/food-61-t.jpg" alt="Dish 68" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-62.jpg" data-i="68" aria-label="Dish 69"><img src="assets/food/food-62-t.jpg" alt="Dish 69" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-63.jpg" data-i="69" aria-label="Dish 70"><img src="assets/food/food-63-t.jpg" alt="Dish 70" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-64.jpg" data-i="70" aria-label="Dish 71"><img src="assets/food/food-64-t.jpg" alt="Dish 71" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-65.jpg" data-i="71" aria-label="Dish 72"><img src="assets/food/food-65-t.jpg" alt="Dish 72" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-66.jpg" data-i="72" aria-label="Dish 73"><img src="assets/food/food-66-t.jpg" alt="Dish 73" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-67.jpg" data-i="73" aria-label="Dish 74"><img src="assets/food/food-67-t.jpg" alt="Dish 74" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-68.jpg" data-i="74" aria-label="Dish 75"><img src="assets/food/food-68-t.jpg" alt="Dish 75" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-69.jpg" data-i="75" aria-label="Dish 76"><img src="assets/food/food-69-t.jpg" alt="Dish 76" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-70.jpg" data-i="76" aria-label="Dish 77"><img src="assets/food/food-70-t.jpg" alt="Dish 77" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-72.jpg" data-i="77" aria-label="Dish 78"><img src="assets/food/food-72-t.jpg" alt="Dish 78" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-73.jpg" data-i="78" aria-label="Dish 79"><img src="assets/food/food-73-t.jpg" alt="Dish 79" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-74.jpg" data-i="79" aria-label="Dish 80"><img src="assets/food/food-74-t.jpg" alt="Dish 80" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-75.jpg" data-i="80" aria-label="Dish 81"><img src="assets/food/food-75-t.jpg" alt="Dish 81" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-76.jpg" data-i="81" aria-label="Dish 82"><img src="assets/food/food-76-t.jpg" alt="Dish 82" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-79.jpg" data-i="82" aria-label="Dish 83"><img src="assets/food/food-79-t.jpg" alt="Dish 83" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-80.jpg" data-i="83" aria-label="Dish 84"><img src="assets/food/food-80-t.jpg" alt="Dish 84" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-81.jpg" data-i="84" aria-label="Dish 85"><img src="assets/food/food-81-t.jpg" alt="Dish 85" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-82.jpg" data-i="85" aria-label="Dish 86"><img src="assets/food/food-82-t.jpg" alt="Dish 86" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-83.jpg" data-i="86" aria-label="Dish 87"><img src="assets/food/food-83-t.jpg" alt="Dish 87" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-84.jpg" data-i="87" aria-label="Dish 88"><img src="assets/food/food-84-t.jpg" alt="Dish 88" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-85.jpg" data-i="88" aria-label="Dish 89"><img src="assets/food/food-85-t.jpg" alt="Dish 89" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-86.jpg" data-i="89" aria-label="Dish 90"><img src="assets/food/food-86-t.jpg" alt="Dish 90" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-87.jpg" data-i="90" aria-label="Dish 91"><img src="assets/food/food-87-t.jpg" alt="Dish 91" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-88.jpg" data-i="91" aria-label="Dish 92"><img src="assets/food/food-88-t.jpg" alt="Dish 92" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-90.jpg" data-i="92" aria-label="Dish 93"><img src="assets/food/food-90-t.jpg" alt="Dish 93" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-91.jpg" data-i="93" aria-label="Dish 94"><img src="assets/food/food-91-t.jpg" alt="Dish 94" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-92.jpg" data-i="94" aria-label="Dish 95"><img src="assets/food/food-92-t.jpg" alt="Dish 95" loading="lazy" decoding="async"></button>
+      <button class="gitem gh-more" data-full="assets/food/food-96.jpg" data-i="95" aria-label="Dish 96"><img src="assets/food/food-96-t.jpg" alt="Dish 96" loading="lazy" decoding="async"></button>
+  </div>
+  <div class="gal-more rv"><button class="btn btn-g" data-gal="galFood" data-total="96">Show all 96 dishes ↓</button></div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <div class="contact rv">
-    <div class="eyebrow" style="justify-content:center">10 / Contact</div>
+    <div class="eyebrow" style="justify-content:center">12 / Contact</div>
     <h2 class="sec">Let's build something <span class="grad">meaningful</span></h2>
     <p class="sec-sub" style="margin:0 auto 0">
       I'm open to roles and collaboration in <b>AI/ML engineering, data platforms, and applied AI research</b>.
@@ -660,6 +830,14 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   <div>© <span id="yr"></span> Nikkat Afrin · Built from scratch, deployed on GitHub Pages</div>
 </footer>
 
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-x" id="lbX" aria-label="Close">✕</button>
+  <button class="lb-p" id="lbP" aria-label="Previous">‹</button>
+  <img id="lbI" alt="">
+  <button class="lb-n" id="lbN" aria-label="Next">›</button>
+  <div class="lb-c" id="lbC"></div>
+</div>
 </div>
 
 <script>
@@ -970,6 +1148,46 @@ document.getElementById('cform').addEventListener('submit',function(e){
       '▸ Form not connected yet — email me directly, or add a free Formspree ID.';
   }
 });
+
+/* ---------------- galleries + lightbox ---------------- */
+document.querySelectorAll('.gal-more button').forEach(b=>{
+  b.onclick=()=>{
+    const g=document.getElementById(b.dataset.gal);
+    g.classList.toggle('open');
+    const open=g.classList.contains('open');
+    b.textContent=open?'Show fewer ↑':`Show all ${b.dataset.total} ${b.dataset.gal==='galArt'?'pieces':'dishes'} ↓`;
+    if(!open)g.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+});
+(function(){
+  const lb=document.getElementById('lb'),img=document.getElementById('lbI'),cap=document.getElementById('lbC');
+  let list=[],idx=0;
+  function show(i){
+    idx=(i+list.length)%list.length;
+    img.src=list[idx].dataset.full;
+    img.alt=list[idx].querySelector('img').alt;
+    cap.textContent=`${idx+1} / ${list.length}`;
+  }
+  document.querySelectorAll('.gal').forEach(g=>{
+    g.addEventListener('click',e=>{
+      const it=e.target.closest('.gitem'); if(!it)return;
+      list=[...g.querySelectorAll('.gitem')];
+      show(list.indexOf(it));
+      lb.classList.add('on'); document.body.style.overflow='hidden';
+    });
+  });
+  const close=()=>{lb.classList.remove('on');document.body.style.overflow='';img.src=''};
+  document.getElementById('lbX').onclick=close;
+  document.getElementById('lbP').onclick=e=>{e.stopPropagation();show(idx-1)};
+  document.getElementById('lbN').onclick=e=>{e.stopPropagation();show(idx+1)};
+  lb.onclick=e=>{if(e.target===lb)close()};
+  addEventListener('keydown',e=>{
+    if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')show(idx-1);
+    if(e.key==='ArrowRight')show(idx+1);
+  });
+})();
 </script>
 </body>
 </html>
