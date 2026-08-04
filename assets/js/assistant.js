@@ -49,7 +49,7 @@
       id: "projects",
       k: ["projects", "portfolio", "built", "what has she built", "work samples", "repos", "repositories", "showcase"],
       q: "What projects has she built?",
-      a: "Highlights from the projects section:<br><br>• <b>Real-Time Voice Conversational AI</b> — Azure Speech + GPT-4o + RAG over Azure AI Search, streaming over FastAPI/WebSockets<br>• <b>SigmaCam</b> — exact decision boundaries for smooth-activation networks (IEEE IJCNN 2025)<br>• <b>Swap-Hedging Model Explorer</b> — XGBoost at <b>ROC-AUC 0.953</b> with a live threshold slider<br>• <b>Healthcare Provider Network</b> — interactive Tableau dashboards on Tableau Public<br>• <b>E-Commerce Segmentation</b> — K-Means + purchase intent, <b>AUC 0.929</b> over 12,330 sessions<br>• <b>Global HDI Dashboard</b> — 191 countries, R² ≈ 0.98<br>• <b>Climate Indicators ETL</b> — three climate sources merged into one 66-year series<br>• <b>Healthcare Data Platform</b> — PostgreSQL OLTP + SCD2 warehouse + Neo4j graph<br><br>Five of them are <b>live and interactive</b> — see the Dashboards section, or browse <a href='" + GITHUB + "' target='_blank' rel='noopener'>all 21 repos on GitHub →</a>"
+      a: "Highlights from the projects section:<br><br>• <b>Real-Time Voice Conversational AI</b> — Azure Speech + GPT-4o + RAG over Azure AI Search, streaming over FastAPI/WebSockets<br>• <b>SigmaCam</b> — exact decision boundaries for smooth-activation networks (IEEE IJCNN 2025)<br>• <b>Swap-Hedging Model Explorer</b> — XGBoost at <b>ROC-AUC 0.953</b> with a live threshold slider<br>• <b>Healthcare Provider Network</b> — interactive Tableau dashboards on Tableau Public<br>• <b>E-Commerce Segmentation</b> — K-Means + purchase intent, <b>AUC 0.929</b> over 12,330 sessions<br>• <b>Global HDI Dashboard</b> — 191 countries, R² ≈ 0.98<br>• <b>Climate Indicators ETL</b> — three climate sources merged into one 66-year series<br>• <b>Healthcare Data Platform</b> — PostgreSQL OLTP + SCD2 warehouse + Neo4j graph<br><br>Five of them are <b>live and interactive</b> — see the Dashboards section, or browse <a href='" + GITHUB + "' target='_blank' rel='noopener'>all 22 repos on GitHub →</a>"
     },
     {
       id: "dashboards",
@@ -115,7 +115,7 @@
       id: "github",
       k: ["github", "source code", "her code", "open source", "repos", "repositories", "commits", "contributions", "git"],
       q: "What's on her GitHub?",
-      a: "<b>21 public repositories</b> at <a href='" + GITHUB + "' target='_blank' rel='noopener'>github.com/Nikkat-Afrin</a> — including SigmaCam (the IEEE paper code), the Azure voice-AI system, and a dozen documented ML and data-engineering projects, several with live dashboards.<br><br>The GitHub section of this page pulls her repo and pull-request counts live from the GitHub API."
+      a: "<b>22 public repositories</b> at <a href='" + GITHUB + "' target='_blank' rel='noopener'>github.com/Nikkat-Afrin</a> — including SigmaCam (the IEEE paper code), the Azure voice-AI system, and a dozen documented ML and data-engineering projects, several with live dashboards.<br><br>The GitHub section of this page refreshes her repo and pull-request counts live from the GitHub API."
     },
     {
       id: "creative",

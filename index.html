@@ -329,7 +329,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
         <div class="stat"><b class="grad">12×</b><span>Faster assessments</span></div>
         <div class="stat"><b class="grad">40+</b><span>Staff hrs/wk saved</span></div>
         <div class="stat"><b class="grad">1</b><span>IEEE publication</span></div>
-        <div class="stat"><b class="grad" id="s-repos">21</b><span>Public repos</span></div>
+        <div class="stat"><b class="grad" id="s-repos">22</b><span>Public repos</span></div>
       </div>
     </div>
     <div class="orbit-wrap">
@@ -628,13 +628,13 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   <div class="rv">
     <div class="eyebrow">08 / Activity</div>
     <h2 class="sec">On <span class="grad">GitHub</span></h2>
-    <p class="sec-sub">Pulled live from the GitHub API each time this page loads.</p>
+    <p class="sec-sub">Repository and pull-request counts refresh live from the GitHub API.</p>
   </div>
   <div class="gh-grid rv">
-    <div class="card gh-card"><b class="grad" id="g-repos">21</b><span>Public repos</span></div>
-    <div class="card gh-card"><b class="grad" id="g-commits">360</b><span>Commits / year</span></div>
-    <div class="card gh-card"><b class="grad" id="g-prs">141</b><span>Pull requests</span></div>
-    <div class="card gh-card"><b class="grad" id="g-stars">—</b><span>Followers</span></div>
+    <div class="card gh-card"><b class="grad" id="g-repos">22</b><span>Public repos</span></div>
+    <div class="card gh-card"><b class="grad" id="g-prs">140</b><span>Merged PRs</span></div>
+    <div class="card gh-card"><b class="grad" id="g-commits">371</b><span>Commits / year</span></div>
+    <div class="card gh-card"><b class="grad" id="g-contrib">551</b><span>Contributions / year</span></div>
   </div>
   <div class="badges rv" id="achv">
     <span class="badge">✦ Galaxy Brain</span>
@@ -1043,14 +1043,15 @@ document.getElementById('skgrid').innerHTML=SKILLS.map(s=>`
   const setN=(id,v)=>{const e=document.getElementById(id);if(e&&v!=null)e.textContent=v};
   try{
     const u=await fetch('https://api.github.com/users/Nikkat-Afrin').then(r=>r.ok?r.json():null);
-    if(u){
+    if(u&&u.public_repos!=null){
       setN('g-repos',u.public_repos);setN('s-repos',u.public_repos);
-      setN('g-stars',u.followers);
     }
     const pr=await fetch('https://api.github.com/search/issues?q=author:Nikkat-Afrin+type:pr+is:merged&per_page=1')
       .then(r=>r.ok?r.json():null);
     if(pr&&pr.total_count!=null)setN('g-prs',pr.total_count);
-  }catch(e){/* keep baked-in numbers */}
+    // commits/contributions need an authenticated GraphQL call, so those two
+    // stay as committed values rather than exposing a token in the browser
+  }catch(e){/* keep committed numbers */}
 })();
 
 /* ---------------- contact form ---------------- */
@@ -1059,6 +1060,6 @@ document.getElementById('cform').addEventListener('submit',function(){
   b.textContent='Sending…'; b.disabled=true;
 });
 </script>
-<script src="assets/js/assistant.js?v=2" defer></script>
+<script src="assets/js/assistant.js?v=3" defer></script>
 </body>
 </html>
