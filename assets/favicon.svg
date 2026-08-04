@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="p" cx="36%" cy="30%" r="78%">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="42%" stop-color="#22d3ee"/>
+      <stop offset="78%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#3b1d7a"/>
+    </radialGradient>
+    <linearGradient id="r" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e879f9" stop-opacity=".35"/>
+      <stop offset="30%" stop-color="#f0abfc"/>
+      <stop offset="70%" stop-color="#a5b4fc"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity=".35"/>
+    </linearGradient>
+    <clipPath id="behind"><rect x="0" y="0" width="64" height="34"/></clipPath>
+    <clipPath id="front"><rect x="0" y="34" width="64" height="30"/></clipPath>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="#070b18"/>
+  <circle cx="52" cy="12" r="1.4" fill="#eaf4ff" opacity=".9"/>
+  <circle cx="11" cy="18" r="1" fill="#eaf4ff" opacity=".7"/>
+  <circle cx="15" cy="52" r="1.1" fill="#eaf4ff" opacity=".6"/>
+  <circle cx="55" cy="47" r=".9" fill="#eaf4ff" opacity=".55"/>
+
+  <!-- ring: back half sits behind the planet, front half over it -->
+  <g clip-path="url(#behind)">
+    <ellipse cx="32" cy="34" rx="26" ry="8.5" fill="none" stroke="url(#r)" stroke-width="3"
+             transform="rotate(-19 32 34)"/>
+  </g>
+  <circle cx="32" cy="31" r="15" fill="url(#p)"/>
+  <ellipse cx="26" cy="25" rx="6" ry="3.4" fill="#a5f3fc" opacity=".26" transform="rotate(-22 26 25)"/>
+  <ellipse cx="37" cy="37" rx="4.6" ry="2.4" fill="#1e1b4b" opacity=".3" transform="rotate(-22 37 37)"/>
+  <g clip-path="url(#front)">
+    <ellipse cx="32" cy="34" rx="26" ry="8.5" fill="none" stroke="url(#r)" stroke-width="3"
+             transform="rotate(-19 32 34)"/>
+  </g>
+</svg>

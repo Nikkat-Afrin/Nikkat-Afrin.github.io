@@ -11,6 +11,10 @@
 <meta property="og:description" content="First-author IEEE IJCNN 2025. Speech AI, RAG, and cloud-native data platforms.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nikkat-afrin.github.io/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#070b18">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -141,6 +145,19 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
   border:1px solid var(--line-hi);border-radius:100px;padding:5px 13px;margin-bottom:16px}
 .card h3{font-size:1.28rem;font-weight:700;margin-bottom:11px;letter-spacing:-.01em;line-height:1.3}
 .card p{color:var(--dim);font-size:.935rem;margin-bottom:16px}
+/* research figure plates — matplotlib output, so they sit on a light plate */
+.figs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0 6px}
+.fig{margin:0}
+.figw{position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;background:#f7f8fb;
+  border:1px solid var(--line);aspect-ratio:4/3}
+.figw img,.figv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.figv{opacity:0;transition:opacity .3s}
+.figw:hover .figv{opacity:1}
+.figw:hover .fig-zoom,.figw:hover .fig-play{opacity:1}
+.fig-zoom,.fig-play{opacity:0}
+.fig figcaption{font-size:.83rem;color:var(--dim);margin-top:10px;line-height:1.5}
+.fig figcaption b{color:var(--txt)}
+@media(max-width:700px){.figs{grid-template-columns:1fr}}
 .mini-stats{display:flex;gap:26px;flex-wrap:wrap;margin:18px 0}
 .mini-stats div b{display:block;font-size:1.28rem;color:var(--cy);line-height:1.1}
 .mini-stats div span{font-size:.72rem;color:var(--faint);font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
@@ -156,7 +173,10 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 
 
 /* ---------- award flip cards ---------- */
-.aw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:20px}
+.aw-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.aw-grid>.aw{grid-column:span 2}
+/* 5 cards: last row of two gets centred instead of hugging the left edge */
+.aw-grid>.aw:nth-child(4){grid-column:2/span 2}
 .aw{perspective:1200px;height:440px;cursor:pointer}
 .aw-in{position:relative;width:100%;height:100%;transition:transform .68s cubic-bezier(.22,1,.36,1);
   transform-style:preserve-3d}
@@ -185,7 +205,11 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .aw-back p{color:var(--dim);font-size:.865rem;line-height:1.62;margin:0}
 .aw-back .lnk{font-size:.8rem;margin-top:2px}
 .aw-when{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.1em;color:var(--cy)}
-@media(max-width:640px){.aw{height:424px}.aw-grid{grid-template-columns:1fr}}
+@media(max-width:980px){.aw-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .aw-grid>.aw:nth-child(4){grid-column:span 2}}
+@media(max-width:640px){.aw{height:424px}
+  .aw-grid{grid-template-columns:1fr}
+  .aw-grid>.aw,.aw-grid>.aw:nth-child(4){grid-column:auto}}
 @media(hover:none){.aw-hint::before{content:'TAP'}.aw-hint{font-size:0}.aw-hint::before{font-size:.58rem}}
 @media(prefers-reduced-motion:reduce){.aw-in{transition:none}}
 
@@ -294,7 +318,10 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .dnote{color:var(--faint);font-size:.82rem;margin-top:12px;font-family:'JetBrains Mono',monospace}
 
 /* skills */
-.sk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:20px}
+.sk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.sk-grid>.card{display:flex;flex-direction:column}
+@media(max-width:1000px){.sk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.sk-grid{grid-template-columns:1fr}}
 .sk-head{display:flex;align-items:center;gap:11px;margin-bottom:15px}
 .sk-ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;
   background:rgba(34,211,238,.1);border:1px solid var(--line-hi)}
@@ -302,18 +329,6 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .sk-head small{display:block;color:var(--faint);font-size:.75rem;font-weight:400}
 
 /* github stats */
-.gh-strip{display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap;margin-top:26px;
-  padding:16px 20px;border:1px solid var(--line);border-radius:100px;background:var(--panel);backdrop-filter:blur(9px)}
-.gh-who{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--txt);
-  font-family:'JetBrains Mono',monospace;font-size:.82rem;transition:.28s}
-.gh-who:hover{color:var(--cy)}
-.gh-mark{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;
-  border:1px solid var(--line-hi);color:var(--cy);font-size:.8rem}
-.gh-n{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--faint)}
-.gh-n b{color:var(--txt);font-weight:600}
-.gh-strip .badges{margin-left:auto}
-@media(max-width:760px){.gh-strip{border-radius:20px;justify-content:center;text-align:center}
-  .gh-strip .badges{margin-left:0;justify-content:center}}
 .badges{display:flex;gap:10px;flex-wrap:wrap}
 .badge{display:inline-flex;align-items:center;gap:7px;font-size:.79rem;padding:7px 14px;border-radius:100px;
   background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.26);color:#cbb9ff;font-family:'JetBrains Mono',monospace}
@@ -401,10 +416,10 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
     <button class="burger" id="burger" aria-label="Menu">☰</button>
     <div class="nav-links" id="navlinks">
       <a href="#about">About</a>
-      <a href="#research">Research</a>
       <a href="#experience">Experience</a>
-      <a href="#awards">Awards</a>
+      <a href="#research">Research</a>
       <a href="#work">Projects</a>
+      <a href="#awards">Awards</a>
       <a href="#skills">Skills</a>
       <a href="#creative">Creative</a>
       <a href="#contact" class="nav-cta">Contact</a>
@@ -444,6 +459,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   </div>
   <div class="scroll-cue">SCROLL ↓</div>
 </header>
+
 
 <!-- ================= ABOUT ================= -->
 <section id="about">
@@ -495,51 +511,11 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   </div>
 </section>
 
-<!-- ================= RESEARCH ================= -->
-<section id="research">
-  <div class="rv">
-    <div class="eyebrow">02 / Research</div>
-    <h2 class="sec">Published <span class="grad">peer-reviewed</span> work</h2>
-    <p class="sec-sub">Interpretability research on where neural networks actually draw their lines — and why that geometry matters for trust and robustness.</p>
-  </div>
-  <div class="research" style="grid-template-columns:1fr">
-    <div class="card rv">
-      <div class="paper-tag">★ IEEE IJCNN 2025 · First Author</div>
-      <h3>SigmaCam — Exact Decision Boundary Extraction for DNNs with Smooth Nonlinearities</h3>
-      <p>
-        Tools like SplineCam recover exact decision boundaries only for piecewise-linear
-        (ReLU) networks — they break on the smooth activations that dominate modern
-        architectures. SigmaCam closes that gap with a theoretically exact, recursive
-        level-set algorithm that traces the true boundary of MLPs using Sigmoid and SiLU,
-        rather than approximating it by sampling.
-      </p>
-      <div class="mini-stats">
-        <div><b>Exact</b><span>NOT SAMPLED</span></div>
-        <div><b>8</b><span>COLAB DEMOS</span></div>
-        <div><b>GPU</b><span>ACCELERATED</span></div>
-      </div>
-      <div class="tags">
-        <span class="tag">PyTorch</span><span class="tag">Interpretability</span>
-        <span class="tag">Level-Set Methods</span><span class="tag">CUDA</span><span class="tag">Explainable AI</span>
-      </div>
-      <div class="links">
-        <a class="lnk" href="https://ieeexplore.ieee.org/abstract/document/11227622" target="_blank" rel="noopener">Read on IEEE Xplore →</a>
-        <a class="lnk" href="https://github.com/Nikkat-Afrin/SigmaCam" target="_blank" rel="noopener">Code →</a>
-        <a class="lnk demo" href="https://colab.research.google.com/drive/1dfqAOrG8k9gdpTChKLPTx-TqPJ09S1Li" target="_blank" rel="noopener">Run in Colab →</a>
-      </div>
-      <p style="margin-top:20px;margin-bottom:0;font-size:.88rem;color:var(--faint);border-top:1px solid var(--line);padding-top:16px">
-        Why boundary geometry matters: adversarial vulnerability is a statement about
-        <em>distance and curvature</em> near your data. Saliency maps can't show you that —
-        an exact boundary can.
-      </p>
-    </div>
-  </div>
-</section>
 
 <!-- ================= EXPERIENCE ================= -->
 <section id="experience">
   <div class="rv">
-    <div class="eyebrow">03 / Experience</div>
+    <div class="eyebrow">02 / Experience</div>
     <h2 class="sec">Where I've <span class="grad">built things</span></h2>
     <p class="sec-sub">Engineering AI and data systems in production, plus research and graduate work.</p>
   </div>
@@ -680,10 +656,95 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   </div>
 </section>
 
+
+<!-- ================= RESEARCH ================= -->
+<section id="research">
+  <div class="rv">
+    <div class="eyebrow">03 / Research</div>
+    <h2 class="sec">Published <span class="grad">peer-reviewed</span> work</h2>
+    <p class="sec-sub">Interpretability research on where neural networks actually draw their lines — and why that geometry matters for trust and robustness.</p>
+  </div>
+  <div class="research" style="grid-template-columns:1fr">
+    <div class="card rv">
+      <div class="paper-tag">★ IEEE IJCNN 2025 · First Author</div>
+      <h3>SigmaCam — Exact Decision Boundary Extraction for DNNs with Smooth Nonlinearities</h3>
+      <p>
+        Tools like SplineCam recover exact decision boundaries only for piecewise-linear
+        (ReLU) networks — they break on the smooth activations that dominate modern
+        architectures. SigmaCam closes that gap with a theoretically exact, recursive
+        level-set algorithm that traces the true boundary of MLPs using Sigmoid and SiLU,
+        rather than approximating it by sampling.
+      </p>
+
+      <div class="figs">
+        <figure class="fig">
+          <div class="figw" data-full="assets/proj/bnd-sigmoid.mp4" data-cap="Sigmoid MLP — exact decision boundary tracked through training">
+            <img src="assets/proj/bnd-sigmoid.jpg" alt="Extracted decision boundary on a two-spiral dataset, Sigmoid network" loading="lazy" decoding="async">
+            <video class="figv" src="assets/proj/bnd-sigmoid.mp4" muted loop playsinline preload="none"></video>
+            <span class="p-zoom fig-zoom">⤢ CLICK TO ENLARGE</span>
+            <span class="p-play fig-play">▶ HOVER TO PLAY</span>
+          </div>
+          <figcaption><b>Sigmoid</b> — the exact boundary, recovered at every epoch as the network learns the two-spiral task.</figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="figw" data-full="assets/proj/bnd-silu.mp4" data-cap="SiLU MLP — exact decision boundary tracked through training">
+            <img src="assets/proj/bnd-silu.jpg" alt="Extracted decision boundary on a two-spiral dataset, SiLU network" loading="lazy" decoding="async">
+            <video class="figv" src="assets/proj/bnd-silu.mp4" muted loop playsinline preload="none"></video>
+            <span class="p-zoom fig-zoom">⤢ CLICK TO ENLARGE</span>
+            <span class="p-play fig-play">▶ HOVER TO PLAY</span>
+          </div>
+          <figcaption><b>SiLU</b> — same algorithm, a different smooth activation. No sampling, no approximation.</figcaption>
+        </figure>
+      </div>
+
+      <div class="mini-stats">
+        <div><b>Exact</b><span>NOT SAMPLED</span></div>
+        <div><b>8</b><span>COLAB DEMOS</span></div>
+        <div><b>GPU</b><span>ACCELERATED</span></div>
+      </div>
+      <div class="tags">
+        <span class="tag">PyTorch</span><span class="tag">Interpretability</span>
+        <span class="tag">Level-Set Methods</span><span class="tag">CUDA</span><span class="tag">Explainable AI</span>
+      </div>
+      <div class="links">
+        <a class="lnk" href="https://ieeexplore.ieee.org/abstract/document/11227622" target="_blank" rel="noopener">Read on IEEE Xplore →</a>
+        <a class="lnk" href="https://github.com/Nikkat-Afrin/SigmaCam" target="_blank" rel="noopener">Code →</a>
+        <a class="lnk demo" href="https://colab.research.google.com/drive/1dfqAOrG8k9gdpTChKLPTx-TqPJ09S1Li" target="_blank" rel="noopener">Run in Colab →</a>
+      </div>
+      <p style="margin-top:20px;margin-bottom:0;font-size:.88rem;color:var(--faint);border-top:1px solid var(--line);padding-top:16px">
+        Why boundary geometry matters: adversarial vulnerability is a statement about
+        <em>distance and curvature</em> near your data. Saliency maps can't show you that —
+        an exact boundary can.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= PROJECTS ================= -->
+<section id="work">
+  <div class="rv">
+    <div class="eyebrow">04 / Selected Work</div>
+    <h2 class="sec">Projects with <span class="grad">real artifacts</span></h2>
+    <p class="sec-sub">Every project links to working code. Several run live in your browser — no setup, no install.</p>
+  </div>
+  <div class="filters rv">
+    <button class="fbtn act" data-f="all">All</button>
+    <button class="fbtn" data-f="ai">AI &amp; LLM</button>
+    <button class="fbtn" data-f="de">Data Engineering</button>
+    <button class="fbtn" data-f="ml">Machine Learning</button>
+    <button class="fbtn" data-f="viz">Visualization</button>
+    <button class="fbtn" data-f="research">Research</button>
+  </div>
+  <div class="pgrid" id="pgrid"></div>
+  <div class="more-wrap rv"><button class="btn btn-g" id="moreBtn">Show all projects ↓</button></div>
+</section>
+
+
 <!-- ================= AWARDS ================= -->
 <section id="awards">
   <div class="rv">
-    <div class="eyebrow">04 / Recognition</div>
+    <div class="eyebrow">05 / Recognition</div>
     <h2 class="sec">Awards &amp; <span class="grad">achievements</span></h2>
     <p class="sec-sub">Hover any card for the story behind it.</p>
   </div>
@@ -783,24 +844,6 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   </div>
 </section>
 
-<!-- ================= PROJECTS ================= -->
-<section id="work">
-  <div class="rv">
-    <div class="eyebrow">05 / Selected Work</div>
-    <h2 class="sec">Projects with <span class="grad">real artifacts</span></h2>
-    <p class="sec-sub">Every project links to working code. Several run live in your browser — no setup, no install.</p>
-  </div>
-  <div class="filters rv">
-    <button class="fbtn act" data-f="all">All</button>
-    <button class="fbtn" data-f="ai">AI &amp; LLM</button>
-    <button class="fbtn" data-f="de">Data Engineering</button>
-    <button class="fbtn" data-f="ml">Machine Learning</button>
-    <button class="fbtn" data-f="viz">Visualization</button>
-    <button class="fbtn" data-f="research">Research</button>
-  </div>
-  <div class="pgrid" id="pgrid"></div>
-  <div class="more-wrap rv"><button class="btn btn-g" id="moreBtn">Show all projects ↓</button></div>
-</section>
 
 <!-- ================= SKILLS ================= -->
 <section id="skills">
@@ -809,19 +852,8 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
     <h2 class="sec">Technologies I <span class="grad">work in</span></h2>
   </div>
   <div class="sk-grid" id="skgrid"></div>
-
-  <div class="gh-strip rv">
-    <a class="gh-who" href="https://github.com/Nikkat-Afrin" target="_blank" rel="noopener">
-      <span class="gh-mark">⌥</span> github.com/Nikkat-Afrin
-    </a>
-    <span class="gh-n"><b id="g-repos">22</b> public repos</span>
-    <div class="badges" id="achv">
-      <span class="badge">✦ Galaxy Brain</span>
-      <span class="badge">⚡ Quickdraw</span>
-      <span class="badge">⬡ Developer Program</span>
-    </div>
-  </div>
 </section>
+
 
 <!-- ================= CREATIVE ================= -->
 <section id="creative">
@@ -864,6 +896,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   </div>
 </section>
 
+
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <div class="contact rv">
@@ -899,6 +932,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
     </div>
   </div>
 </section>
+
 
 <footer>
   <div class="q">"Turning raw, messy pieces into something meaningful."</div>
@@ -1171,6 +1205,13 @@ function wireGifs(){
   });
 }
 
+/* research figures: same lazy hover-to-play behaviour */
+document.querySelectorAll('.figw').forEach(w=>{
+  const v=w.querySelector('video.figv'); if(!v)return;
+  w.addEventListener('mouseenter',()=>{ v.play().catch(()=>{}); });
+  w.addEventListener('mouseleave',()=>{ v.pause(); });
+});
+
 function applyView(){
   const cards=[...document.querySelectorAll('.p-card')];
   let shown=0, total=0;
@@ -1231,9 +1272,7 @@ document.getElementById('skgrid').innerHTML=SKILLS.map(s=>`
   const setN=(id,v)=>{const e=document.getElementById(id);if(e&&v!=null)e.textContent=v};
   try{
     const u=await fetch('https://api.github.com/users/Nikkat-Afrin').then(r=>r.ok?r.json():null);
-    if(u&&u.public_repos!=null){
-      setN('g-repos',u.public_repos);setN('s-repos',u.public_repos);
-    }
+    if(u&&u.public_repos!=null)setN('s-repos',u.public_repos);
   }catch(e){/* keep committed numbers */}
 })();
 
@@ -1272,7 +1311,7 @@ document.querySelectorAll('.aw').forEach(function(c){
   document.addEventListener('click',e=>{
     const lb=e.target.closest('.live-btn');
     if(lb){ openLive(lb.dataset.live, lb.dataset.cap); return; }
-    const cover=e.target.closest('.p-cover');
+    const cover=e.target.closest('.p-cover,.figw');
     if(!cover)return;
     const src=cover.dataset.full||'';
     clear();
@@ -1299,6 +1338,6 @@ document.getElementById('cform').addEventListener('submit',function(){
   b.textContent='Sending…'; b.disabled=true;
 });
 </script>
-<script src="assets/js/assistant.js?v=6" defer></script>
+<script src="assets/js/assistant.js?v=7" defer></script>
 </body>
 </html>
