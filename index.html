@@ -114,28 +114,48 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
   width:290px;height:290px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle at 50% 45%,rgba(34,211,238,.2),rgba(129,140,248,.13) 45%,transparent 72%);
   filter:blur(2px)}
-.figure{position:relative;z-index:2;width:min(330px,86%);aspect-ratio:760/1040;
+/* the photo sits in a blob whose shape morphs, with a ring and gradient layer
+   morphing in step behind it. Two shots crossfade on hover. */
+.figure{position:relative;z-index:2;width:min(322px,84%);aspect-ratio:880/1048;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
-  opacity:0;transform:translateY(64px) scale(.97);
+  opacity:0;transform:translateY(58px) scale(.96);
   transition:opacity .9s cubic-bezier(.22,1,.36,1),transform 1.05s cubic-bezier(.22,1,.36,1)}
-.figure.up{opacity:1;transform:none;animation:hover-float 7s ease-in-out 1.2s infinite}
-@keyframes hover-float{50%{transform:translateY(-11px)}}
-.figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center;
-  display:block;filter:drop-shadow(0 26px 44px rgba(0,0,0,.62));
-  transition:opacity .55s ease,transform .55s cubic-bezier(.22,1,.36,1)}
-.fig-b{opacity:0;transform:scale(1.03)}
-.figure:hover .fig-a,.figure.flip .fig-a{opacity:0;transform:scale(.98)}
+.figure.up{opacity:1;transform:none}
+@keyframes morphBlob{
+  0%,100%{border-radius:60% 40% 70% 30% / 40% 60% 60% 40%}
+  25%    {border-radius:40% 60% 30% 70% / 60% 40% 40% 60%}
+  50%    {border-radius:70% 30% 50% 50% / 30% 70% 50% 50%}
+  75%    {border-radius:30% 70% 60% 40% / 70% 30% 40% 60%}
+}
+.photo-blob,.photo-ring,.photo-main{animation:morphBlob 9s ease-in-out infinite}
+.photo-blob{position:absolute;inset:-16px -20px -12px -18px;
+  background:linear-gradient(135deg,rgba(34,211,238,.34),rgba(129,140,248,.26) 48%,rgba(232,121,249,.24));
+  filter:blur(20px)}
+.photo-ring{position:absolute;inset:-9px;border:1px solid var(--line-hi);animation-delay:-1.4s}
+.photo-main{position:absolute;inset:0;overflow:hidden;
+  box-shadow:0 26px 62px rgba(0,0,0,.6),inset 0 0 0 1px rgba(190,220,255,.14)}
+.photo-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;
+  display:block;transition:opacity .6s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.fig-b{opacity:0;transform:scale(1.06)}
+.figure:hover .fig-a,.figure.flip .fig-a{opacity:0;transform:scale(1.05)}
 .figure:hover .fig-b,.figure.flip .fig-b{opacity:1;transform:none}
-.fig-base{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);z-index:1;pointer-events:none;
-  width:250px;height:26px;border-radius:50%;
-  background:radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.42),rgba(129,140,248,.18) 55%,transparent 76%);
-  filter:blur(5px)}
+/* floating pins */
+@keyframes pinFloat{50%{transform:translateY(-9px)}}
+.pin{position:absolute;z-index:4;white-space:nowrap;font-family:'JetBrains Mono',monospace;
+  font-size:.63rem;font-weight:500;letter-spacing:.09em;padding:7px 13px;border-radius:100px;
+  background:rgba(11,16,34,.92);border:1px solid var(--line);color:var(--txt);
+  box-shadow:0 10px 26px rgba(0,0,0,.5);backdrop-filter:blur(8px);
+  animation:pinFloat 3.6s ease-in-out infinite}
+.pin-1{top:9%;left:-26px;color:#ffd479;border-color:rgba(255,212,121,.3)}
+.pin-2{bottom:15%;right:-22px;color:var(--cy);border-color:var(--line-hi);animation-delay:-1.8s}
 .fig-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:3;
   font-family:'JetBrains Mono',monospace;font-size:.63rem;font-weight:500;letter-spacing:.24em;
   color:var(--faint);opacity:.72;transition:opacity .3s;pointer-events:none}
 .orbit-wrap:hover .fig-hint{opacity:0}
 @media(prefers-reduced-motion:reduce){
-  .figure{opacity:1!important;transform:none!important;animation:none!important}
+  .figure{opacity:1!important;transform:none!important}
+  .photo-blob,.photo-ring,.photo-main{animation:none;border-radius:58% 42% 62% 38% / 42% 58% 58% 42%}
+  .pin{animation:none}
 }
 .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--faint);
   font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.24em;animation:bob 2.4s ease-in-out infinite}
@@ -463,10 +483,11 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 @media(max-width:900px){
   .hero-top,.about,.research{grid-template-columns:1fr}
   .ly-col{position:static;top:auto;margin-top:12px}
-  .orbit-wrap{order:-1;min-height:430px}
-  .figure{width:min(272px,72%)}
+  .orbit-wrap{order:-1;min-height:420px}
+  .figure{width:min(266px,70%)}
   .orb1{width:210px;height:210px;margin-left:-105px}.orb2{width:272px;height:272px;margin-left:-136px}.orb3{width:334px;height:334px;margin-left:-167px}
-  .portal{width:238px;height:238px}.fig-base{width:206px}
+  .portal{width:238px;height:238px}
+  .pin{font-size:.58rem;padding:6px 11px}.pin-1{left:-12px}.pin-2{right:-10px}
   .nav-links{position:fixed;inset:56px 0 auto;flex-direction:column;background:rgba(4,5,13,.97);
     padding:22px 26px;gap:16px;border-bottom:1px solid var(--line);display:none}
   .nav-links.open{display:flex}
@@ -533,10 +554,15 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
       <div class="portal"></div>
       <div class="figure" id="heroFig">
-        <img class="fig-a" src="assets/hero-a.png" alt="Nikkat Afrin" width="760" height="1040" decoding="async">
-        <img class="fig-b" src="assets/hero-b.png" alt="Nikkat Afrin at her Yeshiva University graduation" width="760" height="1040" loading="lazy" decoding="async">
+        <div class="photo-blob"></div>
+        <div class="photo-ring"></div>
+        <div class="photo-main">
+          <img class="fig-a" src="assets/hero-a.jpg" alt="Nikkat Afrin" width="880" height="1048" decoding="async">
+          <img class="fig-b" src="assets/hero-b.jpg" alt="Nikkat Afrin at her Yeshiva University graduation" width="880" height="1048" loading="lazy" decoding="async">
+        </div>
+        <span class="pin pin-1">★ IEEE IJCNN 2025</span>
+        <span class="pin pin-2">93% accuracy</span>
       </div>
-      <div class="fig-base"></div>
       <span class="fig-hint">HOVER ME</span>
     </div>
   </div>
