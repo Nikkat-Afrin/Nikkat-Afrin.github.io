@@ -74,15 +74,17 @@ h2.sec{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:700;letter-spacing:-.02em;
 /* ---------- hero ---------- */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
   max-width:var(--max);margin:0 auto;padding:120px 26px 70px;position:relative}
-.hero-top{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero-top{display:grid;grid-template-columns:.86fr 1.14fr;gap:52px;align-items:center}
+.hero-copy{min-width:0}
 .hi{font-family:'JetBrains Mono',monospace;color:var(--cy);font-size:.87rem;letter-spacing:.2em;margin-bottom:18px}
 h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-spacing:-.035em;margin-bottom:8px}
-.role{font-size:clamp(1.05rem,2.4vw,1.5rem);font-weight:600;margin-bottom:20px;min-height:1.6em}
+.role{font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:600;margin-bottom:18px;min-height:1.6em}
 .rot{font-family:'JetBrains Mono',monospace;color:var(--cy)}
 .cursor{display:inline-block;width:2px;height:1.05em;background:var(--cy);vertical-align:-.16em;animation:bl 1s steps(2) infinite}
 @keyframes bl{50%{opacity:0}}
-.blurb{color:var(--dim);max-width:600px;font-size:1.06rem;margin-bottom:32px}
-.blurb b{color:var(--star);font-weight:600}
+.tagline{display:flex;flex-wrap:wrap;align-items:center;gap:9px 0;margin-bottom:34px;max-width:640px}
+.tagline span{color:var(--dim);font-size:.995rem;font-weight:500}
+.tagline span:not(:last-child)::after{content:'•';color:var(--cy);margin:0 13px;font-weight:700;opacity:.85}
 .btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:100px;
   text-decoration:none;font-size:.9rem;font-weight:600;transition:.28s;border:1px solid transparent;cursor:pointer}
@@ -90,6 +92,8 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(34,211,238,.3)}
 .btn-g{border-color:var(--line);color:var(--txt);background:rgba(255,255,255,.02)}
 .btn-g:hover{border-color:var(--line-hi);color:var(--cy);transform:translateY(-2px)}
+.btn-o{border-color:var(--line-hi);color:var(--cy);background:rgba(34,211,238,.07)}
+.btn-o:hover{background:rgba(34,211,238,.15);transform:translateY(-2px);box-shadow:0 12px 30px rgba(34,211,238,.2)}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;padding-top:16px;max-width:620px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px 12px;
   text-align:center;backdrop-filter:blur(9px);transition:.3s}
@@ -491,7 +495,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 @media(max-width:900px){
   .hero-top,.about,.research{grid-template-columns:1fr}
   .ly-col{position:static;top:auto;margin-top:12px}
-  .orbit-wrap{order:-1;min-height:470px}
+  .orbit-wrap{min-height:470px}
   .figure{width:min(310px,78%)}
   .orb1{width:250px;height:250px;margin-left:-125px}.orb2{width:322px;height:322px;margin-left:-161px}.orb3{width:394px;height:394px;margin-left:-197px}
   .portal{width:300px;height:300px}
@@ -537,28 +541,6 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <div class="hero-top">
-    <div>
-      <div class="hi">&lt;/&gt; HELLO, UNIVERSE · I'M</div>
-      <h1>Nikkat <span class="grad">Afrin</span></h1>
-      <div class="role">I build <span class="rot" id="rot"></span><span class="cursor"></span></div>
-      <p class="blurb">
-        <b>AI &amp; Data Platform Engineer</b> with <b>2+ years</b> building LLM, RAG and speech-AI
-        systems that people actually depend on. I cut reading-assessment review from
-        <b>60+ minutes to under 5</b> at Peblink, and I'm first author of <b>SigmaCam</b>
-        at <b>IEEE IJCNN 2025</b>.
-      </p>
-      <div class="btns">
-        <a href="#work" class="btn btn-p">Explore my work →</a>
-        <a href="assets/Nikkat-Afrin-Resume.pdf" class="btn btn-g" id="resumeBtn" download>↓ Résumé</a>
-        <a href="https://github.com/Nikkat-Afrin" target="_blank" rel="noopener" class="btn btn-g">GitHub</a>
-      </div>
-      <div class="stats">
-        <div class="stat"><b class="grad">2+</b><span>Years experience</span></div>
-        <div class="stat"><b class="grad">1</b><span>IEEE publication</span></div>
-        <div class="stat"><b class="grad">12×</b><span>Faster assessments</span></div>
-        <div class="stat"><b class="grad" id="s-repos">22</b><span>Public repos</span></div>
-      </div>
-    </div>
     <div class="orbit-wrap">
       <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
       <div class="portal"></div>
@@ -573,6 +555,30 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
         <span class="pin pin-2"><i>🤖</i><b>AI &amp; LLMs</b><small>RAG · GPT-4o · Whisper</small></span>
       </div>
       <span class="fig-hint">HOVER ME</span>
+    </div>
+
+    <div class="hero-copy">
+      <div class="hi">&lt;/&gt; HELLO, UNIVERSE · I'M</div>
+      <h1>Nikkat <span class="grad">Afrin</span></h1>
+      <div class="role">I build <span class="rot" id="rot"></span><span class="cursor"></span></div>
+      <div class="tagline">
+        <span>AI &amp; Data Platform Engineer</span>
+        <span>LLM &amp; RAG Systems</span>
+        <span>Speech AI</span>
+        <span>Serverless Data Platforms</span>
+      </div>
+      <div class="btns">
+        <a href="#work" class="btn btn-p">Explore my work →</a>
+        <a href="#contact" class="btn btn-o">✉ Contact me</a>
+        <a href="assets/Nikkat-Afrin-Resume.pdf" class="btn btn-g" id="resumeBtn" download>↓ Résumé</a>
+        <a href="https://github.com/Nikkat-Afrin" target="_blank" rel="noopener" class="btn btn-g">GitHub</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b class="grad">2+</b><span>Years experience</span></div>
+        <div class="stat"><b class="grad">1</b><span>IEEE publication</span></div>
+        <div class="stat"><b class="grad">12×</b><span>Faster assessments</span></div>
+        <div class="stat"><b class="grad" id="s-repos">22</b><span>Public repos</span></div>
+      </div>
     </div>
   </div>
   <div class="scroll-cue">SCROLL ↓</div>
