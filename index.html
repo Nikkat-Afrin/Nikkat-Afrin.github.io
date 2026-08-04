@@ -365,8 +365,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
         On the research side I'm first author of <b>SigmaCam</b> (IEEE IJCNN 2025) — extracting
         <b>exact</b> decision boundaries for smooth-activation networks that prior exact methods
         couldn't handle, cutting runtime <b>~93%</b> while holding <b>~99.8% accuracy</b>. It won
-        <b>Best Research Project</b> at Yeshiva's CSE Research Forum. The follow-up, <b>SigmaCam++</b>,
-        is under review at <b>IEEE TNNLS</b>.
+        <b>Best Research Project</b> at Yeshiva's CSE Research Forum.
       </p>
       <p>
         I care a lot about honest reporting — showing the baseline, naming what didn't work, and
@@ -378,7 +377,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       <div class="fact"><i>🎓</i><div><b>Education</b><span>M.S. Data Analytics &amp; Visualization, Yeshiva University — GPA 3.95</span></div></div>
       <div class="fact"><i>🥇</i><div><b>Undergraduate</b><span>B.C.A., Andhra University — Gold Medalist, 4.0/4.0</span></div></div>
       <div class="fact"><i>🏆</i><div><b>Recognition</b><span>Best Research Project Award · Innovation Lab Finalist</span></div></div>
-      <div class="fact"><i>📄</i><div><b>Research</b><span>IEEE IJCNN 2025 (first author) · TNNLS under review</span></div></div>
+      <div class="fact"><i>📄</i><div><b>Research</b><span>IEEE IJCNN 2025 — first author</span></div></div>
       <div class="fact"><i>📍</i><div><b>Based in</b><span>New York, USA</span></div></div>
       <div class="fact"><i>🎨</i><div><b>Away from the keyboard</b><span>Sand painting &amp; cooking — same instinct, different medium</span></div></div>
     </div>
@@ -392,7 +391,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
     <h2 class="sec">Published <span class="grad">peer-reviewed</span> work</h2>
     <p class="sec-sub">Interpretability research on where neural networks actually draw their lines — and why that geometry matters for trust and robustness.</p>
   </div>
-  <div class="research">
+  <div class="research" style="grid-template-columns:1fr">
     <div class="card rv">
       <div class="paper-tag">★ IEEE IJCNN 2025 · First Author</div>
       <h3>SigmaCam — Exact Decision Boundary Extraction for DNNs with Smooth Nonlinearities</h3>
@@ -417,19 +416,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
         <a class="lnk" href="https://github.com/Nikkat-Afrin/SigmaCam" target="_blank" rel="noopener">Code →</a>
         <a class="lnk demo" href="https://colab.research.google.com/drive/1dfqAOrG8k9gdpTChKLPTx-TqPJ09S1Li" target="_blank" rel="noopener">Run in Colab →</a>
       </div>
-    </div>
-    <div class="card rv">
-      <div class="paper-tag">◷ Under Review · IEEE TNNLS</div>
-      <h3>SigmaCam++</h3>
-      <p>
-        An extended, more general formulation of exact smooth-boundary extraction — scaling the
-        method to broader architectures with wider real-world validation. Submitted to IEEE
-        Transactions on Neural Networks and Learning Systems.
-      </p>
-      <div class="tags">
-        <span class="tag">Journal Submission</span><span class="tag">Extended Method</span><span class="tag">Deep Learning</span>
-      </div>
-      <p style="margin-top:18px;font-size:.86rem;color:var(--faint)">
+      <p style="margin-top:20px;margin-bottom:0;font-size:.88rem;color:var(--faint);border-top:1px solid var(--line);padding-top:16px">
         Why boundary geometry matters: adversarial vulnerability is a statement about
         <em>distance and curvature</em> near your data. Saliency maps can't show you that —
         an exact boundary can.
@@ -1035,6 +1022,6 @@ document.getElementById('cform').addEventListener('submit',function(){
   b.textContent='Sending…'; b.disabled=true;
 });
 </script>
-<script src="assets/js/assistant.js?v=3" defer></script>
+<script src="assets/js/assistant.js?v=4" defer></script>
 </body>
 </html>
