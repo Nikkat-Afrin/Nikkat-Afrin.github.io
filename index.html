@@ -713,15 +713,23 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       I'm open to roles and collaboration in <b>AI/ML engineering, data platforms, and applied AI research</b>.
       The fastest way to reach me is below.
     </p>
-    <!-- Replace YOUR_FORM_ID with a free Formspree ID to make this live -->
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="cform">
+    <form action="https://formsubmit.co/fnunikkatafrin@gmail.com" method="POST" id="cform">
+      <!-- FormSubmit config: subject line, no captcha page, redirect to our own thank-you -->
+      <input type="hidden" name="_subject" value="New message from your portfolio">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://nikkat-afrin.github.io/thanks/">
+      <!-- honeypot: bots fill this, humans never see it -->
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="frow">
-        <div><label for="nm">Name</label><input id="nm" name="name" required></div>
-        <div><label for="em">Email</label><input id="em" type="email" name="email" required></div>
+        <div><label for="nm">Name</label><input id="nm" name="name" required autocomplete="name"></div>
+        <div><label for="em">Email</label><input id="em" type="email" name="email" required autocomplete="email"></div>
       </div>
       <div><label for="ms">Message</label><textarea id="ms" name="message" required></textarea></div>
       <button class="btn btn-p" type="submit" style="justify-content:center">Send message →</button>
-      <div id="fmsg" style="font-size:.85rem;color:var(--cy);font-family:'JetBrains Mono',monospace"></div>
+      <div id="fmsg" style="font-size:.85rem;color:var(--dim);font-family:'JetBrains Mono',monospace">
+        ▸ Goes straight to my inbox.
+      </div>
     </form>
     <div class="socials">
       <a class="btn btn-p" href="mailto:fnunikkatafrin@gmail.com">✉ fnunikkatafrin@gmail.com</a>
@@ -1047,54 +1055,10 @@ document.getElementById('skgrid').innerHTML=SKILLS.map(s=>`
 })();
 
 /* ---------------- contact form ---------------- */
-document.getElementById('cform').addEventListener('submit',function(e){
-  const a=this.getAttribute('action')||'';
-  if(a.includes('YOUR_FORM_ID')){
-    e.preventDefault();
-    document.getElementById('fmsg').textContent=
-      '▸ Form not connected yet — email me directly, or add a free Formspree ID.';
-  }
+document.getElementById('cform').addEventListener('submit',function(){
+  const b=this.querySelector('button[type=submit]');
+  b.textContent='Sending…'; b.disabled=true;
 });
-
-/* ---------------- galleries + lightbox ---------------- */
-document.querySelectorAll('.gal-more button').forEach(b=>{
-  b.onclick=()=>{
-    const g=document.getElementById(b.dataset.gal);
-    g.classList.toggle('open');
-    const open=g.classList.contains('open');
-    b.textContent=open?'Show fewer ↑':`Show all ${b.dataset.total} ${b.dataset.gal==='galArt'?'pieces':'dishes'} ↓`;
-    if(!open)g.scrollIntoView({behavior:'smooth',block:'start'});
-  };
-});
-(function(){
-  const lb=document.getElementById('lb'),img=document.getElementById('lbI'),cap=document.getElementById('lbC');
-  let list=[],idx=0;
-  function show(i){
-    idx=(i+list.length)%list.length;
-    img.src=list[idx].dataset.full;
-    img.alt=list[idx].querySelector('img').alt;
-    cap.textContent=`${idx+1} / ${list.length}`;
-  }
-  document.querySelectorAll('.gal').forEach(g=>{
-    g.addEventListener('click',e=>{
-      const it=e.target.closest('.gitem'); if(!it)return;
-      list=[...g.querySelectorAll('.gitem')];
-      show(list.indexOf(it));
-      lb.classList.add('on'); document.body.style.overflow='hidden';
-    });
-  });
-  const close=()=>{lb.classList.remove('on');document.body.style.overflow='';img.src=''};
-  document.getElementById('lbX').onclick=close;
-  document.getElementById('lbP').onclick=e=>{e.stopPropagation();show(idx-1)};
-  document.getElementById('lbN').onclick=e=>{e.stopPropagation();show(idx+1)};
-  lb.onclick=e=>{if(e.target===lb)close()};
-  addEventListener('keydown',e=>{
-    if(!lb.classList.contains('on'))return;
-    if(e.key==='Escape')close();
-    if(e.key==='ArrowLeft')show(idx-1);
-    if(e.key==='ArrowRight')show(idx+1);
-  });
-})();
 </script>
 </body>
 </html>

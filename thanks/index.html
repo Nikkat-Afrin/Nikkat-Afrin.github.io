@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message sent — Nikkat Afrin</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04050d;--txt:#dbe6f5;--dim:#8fa3c4;--faint:#5e719a;
+  --line:rgba(120,160,255,.16);--line-hi:rgba(34,211,238,.45);--cy:#22d3ee;
+  --grad:linear-gradient(100deg,#22d3ee 0%,#818cf8 45%,#e879f9 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk',-apple-system,Segoe UI,sans-serif;
+  min-height:100vh;display:grid;place-items:center;padding:26px;overflow:hidden;text-align:center}
+#stars{position:fixed;inset:0;z-index:0}
+.neb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.45;z-index:0;pointer-events:none}
+.n1{width:560px;height:560px;top:-160px;left:-140px;background:radial-gradient(circle,#4c1d95,transparent 68%)}
+.n2{width:520px;height:520px;bottom:-170px;right:-150px;background:radial-gradient(circle,#0e7490,transparent 68%)}
+.card{position:relative;z-index:2;max-width:560px}
+.tick{width:82px;height:82px;margin:0 auto 26px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line-hi);background:rgba(34,211,238,.07);font-size:2.1rem;color:var(--cy);
+  box-shadow:0 0 46px rgba(34,211,238,.22);animation:pop .55s cubic-bezier(.22,1.4,.4,1) both}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.3em;
+  color:var(--cy);text-transform:uppercase;margin-bottom:15px}
+h1{font-size:clamp(2rem,5.5vw,2.9rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{color:var(--dim);font-size:1.02rem;margin-bottom:32px}
+.btns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+a.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 25px;border-radius:100px;
+  text-decoration:none;font-size:.9rem;font-weight:600;transition:.28s;border:1px solid transparent}
+.p{background:var(--grad);color:#04050d}
+.p:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(34,211,238,.3)}
+.g{border-color:var(--line);color:var(--txt)}
+.g:hover{border-color:var(--line-hi);color:var(--cy);transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="neb n1"></div><div class="neb n2"></div>
+
+<div class="card">
+  <div class="tick">✓</div>
+  <div class="eyebrow">Transmission received</div>
+  <h1>Thanks — your message <span class="grad">landed</span>.</h1>
+  <p>It's in my inbox and I'll get back to you soon. In the meantime, feel free to poke around the rest of the site.</p>
+  <div class="btns">
+    <a class="btn p" href="../">← Back to portfolio</a>
+    <a class="btn g" href="../paintings/">Sand paintings</a>
+    <a class="btn g" href="../cooking/">Kitchen</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');
+  let w,h,st=[];
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){
+    w=c.width=innerWidth;h=c.height=innerHeight;st=[];
+    const n=Math.min(240,Math.floor(w*h/6500));
+    for(let i=0;i<n;i++)st.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2+.25,
+      z:Math.random()*.7+.3,tw:Math.random()*6.28,sp:Math.random()*.02+.004});
+  }
+  function draw(anim){
+    x.clearRect(0,0,w,h);
+    for(const s of st){
+      if(anim)s.tw+=s.sp;
+      const o=(.35+Math.abs(Math.sin(s.tw))*.65)*s.z;
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);
+      x.fillStyle='rgba(234,244,255,'+o.toFixed(3)+')';x.fill();
+    }
+    if(anim)requestAnimationFrame(()=>draw(true));
+  }
+  addEventListener('resize',size);size();draw(!reduce);
+})();
+</script>
+</body>
+</html>
