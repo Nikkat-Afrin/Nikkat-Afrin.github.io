@@ -225,18 +225,34 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 
 
 /* ---------- project covers + show more ---------- */
-.p-cover{margin:-26px -26px 16px;height:186px;overflow:hidden;position:relative;background:#0a1120;
+.p-cover{margin:-26px -26px 16px;height:214px;cursor:zoom-in;overflow:hidden;position:relative;background:#0a1120;
   border-bottom:1px solid var(--line)}
 .p-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .p-card:hover .p-cover img{transform:scale(1.05)}
 .p-cover::after{content:'';position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to top,rgba(10,18,34,.72) 0%,transparent 42%)}
+.p-zoom{position:absolute;top:10px;right:11px;z-index:2;font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.1em;color:#cfe6f7;background:rgba(4,10,22,.7);
+  border:1px solid rgba(160,200,255,.3);border-radius:100px;padding:3px 9px;backdrop-filter:blur(4px);
+  opacity:0;transition:opacity .25s}
+.p-card:hover .p-zoom{opacity:1}
+.plb{position:fixed;inset:0;z-index:210;background:rgba(3,4,10,.95);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:30px}
+.plb.on{display:flex}
+.plb img{max-width:94vw;max-height:88vh;border-radius:12px;border:1px solid var(--line-hi);
+  box-shadow:0 24px 70px rgba(0,0,0,.7);background:#fff}
+.plb-x{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;
+  background:rgba(12,18,38,.85);border:1px solid var(--line);color:var(--star);font-size:1.3rem;
+  cursor:pointer;display:grid;place-items:center}
+.plb-x:hover{border-color:var(--cy);color:var(--cy)}
+.plb-c{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim);text-align:center;max-width:80vw}
 .p-play{position:absolute;bottom:10px;right:11px;z-index:2;font-family:'JetBrains Mono',monospace;
   font-size:.58rem;letter-spacing:.1em;color:#a5f3fc;background:rgba(4,10,22,.78);
   border:1px solid rgba(34,211,238,.4);border-radius:100px;padding:3px 9px;backdrop-filter:blur(4px)}
 .more-wrap{display:flex;justify-content:center;margin-top:30px}
 .p-hidden{display:none!important}
-@media(max-width:640px){.p-cover{height:168px}}
+@media(max-width:640px){.p-cover{height:196px}}
 
 /* projects */
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:34px}
@@ -891,6 +907,12 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 </footer>
 
 
+<div class="plb" id="plb" role="dialog" aria-modal="true" aria-label="Project media">
+  <button class="plb-x" id="plbX" aria-label="Close">✕</button>
+  <img id="plbI" alt="">
+  <div class="plb-c" id="plbC"></div>
+</div>
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="lb-x" id="lbX" aria-label="Close">✕</button>
   <button class="lb-p" id="lbP" aria-label="Previous">‹</button>
@@ -983,7 +1005,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 /* ---------------- projects ---------------- */
 const PROJECTS=[
- {t:'Speech-AI Reading Assessment Pipeline',img:'speech.svg',k:'ai',kind:'Work · Peblink / WLRC',
+ {t:'Speech-AI Reading Assessment Pipeline',img:'speech.jpg',full:'speech-full.jpg',k:'ai',kind:'Work · Peblink / WLRC',
   d:'Production speech-AI workflow that transcribes and aligns children\'s oral reading, scores pronunciation, and flags dyslexia-risk patterns in seconds. Serverless AWS: S3 presigned uploads, SQS, Dockerized Lambda, DynamoDB, Athena + QuickSight.',
   m:'93% pronunciation accuracy · 60+ min → under 5 min',
   tags:['faster-Whisper','FastAPI','AWS Lambda','SQS','DynamoDB','Levenshtein','Athena'],
@@ -1117,9 +1139,10 @@ let expanded=false, activeFilter='all';
 function render(){
   grid.innerHTML=PROJECTS.map(p=>`
     <article class="card p-card rv in" data-k="${p.k}">
-      ${p.img?`<div class="p-cover">
+      ${p.img?`<div class="p-cover" data-full="assets/proj/${p.full||p.gif||p.img}" data-cap="${p.t}">
         <img src="assets/proj/${p.img}" alt="${p.t}" loading="lazy" decoding="async"
              ${p.gif?`data-gif="assets/proj/${p.gif}" data-still="assets/proj/${p.img}"`:''}>
+        <span class="p-zoom">⤢ CLICK TO ENLARGE</span>
         ${p.gif?'<span class="p-play">▶ HOVER</span>':''}
       </div>`:''}
       <div class="p-top">
@@ -1255,6 +1278,24 @@ document.querySelectorAll('.aw').forEach(function(c){
     if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('flip');}
   });
 });
+
+
+/* ---------------- project media lightbox ---------------- */
+(function(){
+  const box=document.getElementById('plb');
+  if(!box)return;
+  const img=document.getElementById('plbI'), cap=document.getElementById('plbC');
+  document.addEventListener('click',e=>{
+    const cover=e.target.closest('.p-cover');
+    if(!cover)return;
+    img.src=cover.dataset.full; cap.textContent=cover.dataset.cap||'';
+    box.classList.add('on'); document.body.style.overflow='hidden';
+  });
+  const close=()=>{box.classList.remove('on');document.body.style.overflow='';img.src='';};
+  document.getElementById('plbX').onclick=close;
+  box.onclick=e=>{if(e.target===box)close()};
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('on'))close()});
+})();
 
 /* ---------------- contact form ---------------- */
 document.getElementById('cform').addEventListener('submit',function(){
