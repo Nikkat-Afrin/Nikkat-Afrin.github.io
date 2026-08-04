@@ -115,7 +115,7 @@
       id: "github",
       k: ["github", "source code", "her code", "open source", "repos", "repositories", "commits", "contributions", "git"],
       q: "What's on her GitHub?",
-      a: "<b>22 public repositories</b> at <a href='" + GITHUB + "' target='_blank' rel='noopener'>github.com/Nikkat-Afrin</a> — including SigmaCam (the IEEE paper code), the Azure voice-AI system, and a dozen documented ML and data-engineering projects, several with live dashboards.<br><br>The GitHub section of this page refreshes her repo and pull-request counts live from the GitHub API."
+      a: "<b>22 public repositories</b> at <a href='" + GITHUB + "' target='_blank' rel='noopener'>github.com/Nikkat-Afrin</a> — including SigmaCam (the IEEE paper code), the Azure voice-AI system, and a dozen documented ML and data-engineering projects, several with live dashboards.<br><br>The repo count in the Toolkit section refreshes live from the GitHub API."
     },
     {
       id: "creative",
@@ -154,7 +154,7 @@
     impact:     { id: "experience", label: "Experience" },
     education:  { id: "awards",     label: "Education" },
     awards:     { id: "awards",     label: "Awards" },
-    github:     { id: "github",     label: "GitHub" },
+    github:     { id: "skills",     label: "Toolkit" },
     creative:   { id: "creative",   label: "Creative" },
     contact:    { id: "contact",    label: "Contact" },
     resume:     { id: "top",        label: "Top" },
