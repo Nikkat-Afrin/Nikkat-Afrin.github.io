@@ -239,7 +239,7 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .plb{position:fixed;inset:0;z-index:210;background:rgba(3,4,10,.95);backdrop-filter:blur(8px);
   display:none;align-items:center;justify-content:center;padding:30px}
 .plb.on{display:flex}
-.plb img{max-width:94vw;max-height:88vh;border-radius:12px;border:1px solid var(--line-hi);
+.plb img{max-width:96vw;max-height:92vh;border-radius:12px;border:1px solid var(--line-hi);
   box-shadow:0 24px 70px rgba(0,0,0,.7);background:#fff}
 .plb-x{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;
   background:rgba(12,18,38,.85);border:1px solid var(--line);color:var(--star);font-size:1.3rem;
@@ -247,6 +247,11 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .plb-x:hover{border-color:var(--cy);color:var(--cy)}
 .plb-c{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
   font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim);text-align:center;max-width:80vw}
+.p-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  opacity:0;transition:opacity .35s;pointer-events:none}
+.p-card:hover .p-vid{opacity:1}
+.plb video{max-width:96vw;max-height:92vh;border-radius:12px;border:1px solid var(--line-hi);
+  box-shadow:0 24px 70px rgba(0,0,0,.7);background:#000}
 .p-play{position:absolute;bottom:10px;right:11px;z-index:2;font-family:'JetBrains Mono',monospace;
   font-size:.58rem;letter-spacing:.1em;color:#a5f3fc;background:rgba(4,10,22,.78);
   border:1px solid rgba(34,211,238,.4);border-radius:100px;padding:3px 9px;backdrop-filter:blur(4px)}
@@ -1011,7 +1016,7 @@ const PROJECTS=[
   tags:['faster-Whisper','FastAPI','AWS Lambda','SQS','DynamoDB','Levenshtein','Athena'],
   repo:'https://github.com/Nikkat-Afrin',repoLabel:'GitHub profile →'},
 
- {t:'FELIX — RAG Chatbot for Student Support',img:'felix.jpg',gif:'felix.gif',k:'ai',kind:'Work · Yeshiva University',
+ {t:'FELIX — RAG Chatbot for Student Support',img:'felix.jpg',vid:'felix.mp4',full:'felix-full.mp4',k:'ai',kind:'Work · Yeshiva University',
   d:'Co-built a retrieval-augmented chatbot giving students instant answers on Canvas navigation, course materials and career resources — grounded in real institutional documents rather than a generic model.',
   m:'LangChain · ChromaDB · GPT-4/3.5 · Flask on Azure',
   tags:['LangChain','ChromaDB','OpenAI','RAG','Flask','Azure'],
@@ -1023,13 +1028,13 @@ const PROJECTS=[
   tags:['Azure Functions','Databricks','PostgreSQL','Power BI','ETL'],
   repo:'https://github.com/Nikkat-Afrin',repoLabel:'GitHub profile →'},
 
- {t:'Real-Time Voice Conversational AI',img:'voice.jpg',gif:'voice.gif',k:'ai',kind:'Voice AI · Azure',
+ {t:'Real-Time Voice Conversational AI',img:'voice.jpg',vid:'voice.mp4',full:'voice.mp4',k:'ai',kind:'Voice AI · Azure',
   d:'End-to-end low-latency voice assistant: streaming speech in, reasoned answer out, spoken back. Full-duplex audio over WebSockets with barge-in handling, grounded by RAG over Azure AI Search.',
   m:'FastAPI · WebSockets · GPT-4o · Bicep IaC',
   tags:['Python','FastAPI','Azure Speech','GPT-4o','RAG','Docker'],
   repo:'https://github.com/Nikkat-Afrin/voice-ai-system'},
 
- {t:'SigmaCam — Exact Decision Boundaries',img:'sigmacam.jpg',gif:'sigmacam.gif',k:'research',kind:'IEEE IJCNN 2025',
+ {t:'SigmaCam — Exact Decision Boundaries',img:'sigmacam.jpg',vid:'sigmacam.mp4',full:'sigmacam.mp4',k:'research',kind:'IEEE IJCNN 2025',
   d:'Theoretically exact recursive algorithm extracting decision boundaries for MLPs with smooth activations (Sigmoid, SiLU) — where prior exact methods could not go. Pip-installable, GPU-accelerated.',
   m:'First author · 8 Colab demos',
   tags:['PyTorch','Interpretability','CUDA','Research'],
@@ -1077,7 +1082,7 @@ const PROJECTS=[
   tags:['PostgreSQL','Neo4j','SCD2','Dimensional Modeling','Cypher'],
   repo:'https://github.com/Nikkat-Afrin/disease-management-system-db'},
 
- {t:'Real-Time Multilingual Chat Translation',img:'translate.jpg',gif:'translate.gif',k:'ai',kind:'AWS · NLP',
+ {t:'Real-Time Multilingual Chat Translation',img:'translate.jpg',vid:'translate.mp4',full:'translate.mp4',k:'ai',kind:'AWS · NLP',
   d:'Translation layer for Amazon Connect contact-centre chat: agent types English, customer reads their own language, live mid-conversation. Deployed and documented end to end.',
   m:'Lambda · Translate · Comprehend · React',
   tags:['AWS Lambda','Amazon Translate','React','Serverless'],
@@ -1140,10 +1145,10 @@ function render(){
   grid.innerHTML=PROJECTS.map(p=>`
     <article class="card p-card rv in" data-k="${p.k}">
       ${p.img?`<div class="p-cover" data-full="assets/proj/${p.full||p.gif||p.img}" data-cap="${p.t}">
-        <img src="assets/proj/${p.img}" alt="${p.t}" loading="lazy" decoding="async"
-             ${p.gif?`data-gif="assets/proj/${p.gif}" data-still="assets/proj/${p.img}"`:''}>
+        <img src="assets/proj/${p.img}" alt="${p.t}" loading="lazy" decoding="async">
+        ${p.vid?`<video class="p-vid" src="assets/proj/${p.vid}" muted loop playsinline preload="none"></video>`:''}
         <span class="p-zoom">⤢ CLICK TO ENLARGE</span>
-        ${p.gif?'<span class="p-play">▶ HOVER</span>':''}
+        ${p.vid?'<span class="p-play">▶ HOVER</span>':''}
       </div>`:''}
       <div class="p-top">
         <span class="p-kind">${p.kind}</span>
@@ -1162,12 +1167,12 @@ function render(){
   applyView();
 }
 
-/* animated demo only downloads when someone actually hovers the card */
+/* the clip only downloads once someone actually hovers the card */
 function wireGifs(){
-  document.querySelectorAll('.p-cover img[data-gif]').forEach(img=>{
-    const card=img.closest('.p-card');
-    card.addEventListener('mouseenter',()=>{ if(img.src.indexOf('.gif')<0) img.src=img.dataset.gif; });
-    card.addEventListener('mouseleave',()=>{ img.src=img.dataset.still; });
+  document.querySelectorAll('.p-cover video.p-vid').forEach(v=>{
+    const card=v.closest('.p-card');
+    card.addEventListener('mouseenter',()=>{ v.play().catch(()=>{}); });
+    card.addEventListener('mouseleave',()=>{ v.pause(); });
   });
 }
 
@@ -1285,13 +1290,26 @@ document.querySelectorAll('.aw').forEach(function(c){
   const box=document.getElementById('plb');
   if(!box)return;
   const img=document.getElementById('plbI'), cap=document.getElementById('plbC');
+  let vid=null;
+  function clear(){ img.style.display='none'; img.removeAttribute('src');
+    if(vid){vid.pause();vid.remove();vid=null;} }
   document.addEventListener('click',e=>{
     const cover=e.target.closest('.p-cover');
     if(!cover)return;
-    img.src=cover.dataset.full; cap.textContent=cover.dataset.cap||'';
+    const src=cover.dataset.full||'';
+    clear();
+    if(/\.mp4$/i.test(src)){
+      vid=document.createElement('video');
+      vid.src=src; vid.controls=true; vid.autoplay=true; vid.loop=true;
+      vid.muted=true; vid.playsInline=true;
+      box.insertBefore(vid,cap);
+    }else{
+      img.style.display='block'; img.src=src;
+    }
+    cap.textContent=cover.dataset.cap||'';
     box.classList.add('on'); document.body.style.overflow='hidden';
   });
-  const close=()=>{box.classList.remove('on');document.body.style.overflow='';img.src='';};
+  const close=()=>{box.classList.remove('on');document.body.style.overflow='';clear();};
   document.getElementById('plbX').onclick=close;
   box.onclick=e=>{if(e.target===box)close()};
   addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('on'))close()});
