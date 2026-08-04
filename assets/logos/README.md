@@ -1,18 +1,12 @@
 # Company logos
 
-Drop the files here using these exact names and they appear automatically —
-no code change needed. If a file is missing, the card shows a monogram
-tile instead (P / K / YU), so the layout never breaks.
+| File          | Used on card(s)                                        |
+|---------------|--------------------------------------------------------|
+| `peblink.jpg` | Peblink — WLRC (both the current role and the internship) |
+| `kayaan.jpg`  | KAYAAN Inc.                                            |
+| `sgc.jpg`     | Yeshiva University, Shevet Glaubach Career Center       |
+| `yeshiva.jpg` | Yeshiva University, Katz School of Science & Health     |
 
-| File            | Organisation                        |
-|-----------------|-------------------------------------|
-| `peblink.png`   | Peblink — World Literacy Research Center |
-| `kayaan.png`    | KAYAAN Inc.                          |
-| `yeshiva.png`   | Yeshiva University                   |
-
-**Tips**
-- Square-ish images work best (the tile is 54x54 with padding).
-- PNG with a transparent background looks best on the dark theme.
-- ~200x200px is plenty; anything larger is wasted bytes.
-- Got SVGs instead? Keep the same base name (`peblink.svg`) and say so —
-  it's a one-word change per card.
+Each card loads its file and falls back to a monogram letter if the file is
+missing, so the layout never breaks. Square images work best — the tile is
+54x54 and uses `object-fit: cover`.

@@ -163,8 +163,9 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .xp-logo{width:54px;height:54px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;
   font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem;letter-spacing:-.01em;
   border:1px solid var(--line-hi);background:radial-gradient(circle at 32% 28%,#132542,#080e1c);
-  color:var(--cy);box-shadow:0 0 26px rgba(34,211,238,.14)}
-.xp-logo img{width:100%;height:100%;object-fit:contain;border-radius:12px;padding:7px}
+  color:var(--cy);box-shadow:0 0 26px rgba(34,211,238,.14);overflow:hidden}
+.xp-logo:has(img){background:#fff;border-color:rgba(255,255,255,.22)}
+.xp-logo img{width:100%;height:100%;object-fit:cover;display:block}
 .xp-meta{flex:1;min-width:0}
 .xp-role{font-size:1.14rem;font-weight:700;color:var(--star);line-height:1.3;margin-bottom:3px}
 .xp-org{color:var(--vi);font-size:.94rem;font-weight:600}
@@ -459,7 +460,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
     <article class="xp-card rv">
       <div class="xp-head">
-        <div class="xp-logo"><img src="assets/logos/peblink.png" alt="Peblink logo" onerror="this.replaceWith(document.createTextNode('P'))"></div>
+        <div class="xp-logo"><img src="assets/logos/peblink.jpg" alt="Peblink logo" onerror="this.replaceWith(document.createTextNode('P'))"></div>
         <div class="xp-meta">
           <div class="xp-role">Data &amp; AI Platform Engineer</div>
           <div class="xp-org">Peblink — World Literacy Research Center</div>
@@ -487,7 +488,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
     <article class="xp-card rv">
       <div class="xp-head">
-        <div class="xp-logo"><img src="assets/logos/peblink.png" alt="Peblink logo" onerror="this.replaceWith(document.createTextNode('P'))"></div>
+        <div class="xp-logo"><img src="assets/logos/peblink.jpg" alt="Peblink logo" onerror="this.replaceWith(document.createTextNode('P'))"></div>
         <div class="xp-meta">
           <div class="xp-role">AI / Data Analyst</div>
           <div class="xp-org">Peblink — World Literacy Research Center</div>
@@ -513,7 +514,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
     <article class="xp-card rv">
       <div class="xp-head">
-        <div class="xp-logo"><img src="assets/logos/kayaan.png" alt="KAYAAN Inc. logo" onerror="this.replaceWith(document.createTextNode('K'))"></div>
+        <div class="xp-logo"><img src="assets/logos/kayaan.jpg" alt="KAYAAN Inc. logo" onerror="this.replaceWith(document.createTextNode('K'))"></div>
         <div class="xp-meta">
           <div class="xp-role">AI Workflow / Data Engineer</div>
           <div class="xp-org">KAYAAN Inc. — Logistics AI Startup</div>
@@ -539,7 +540,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
     <article class="xp-card rv">
       <div class="xp-head">
-        <div class="xp-logo"><img src="assets/logos/yeshiva.png" alt="Yeshiva University logo" onerror="this.replaceWith(document.createTextNode('YU'))"></div>
+        <div class="xp-logo"><img src="assets/logos/sgc.jpg" alt="Shevet Glaubach Center logo" onerror="this.replaceWith(document.createTextNode('YU'))"></div>
         <div class="xp-meta">
           <div class="xp-role">Graduate Assistant — Data &amp; AI</div>
           <div class="xp-org">Yeshiva University, Shevet Glaubach Career Center</div>
@@ -565,7 +566,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 
     <article class="xp-card rv">
       <div class="xp-head">
-        <div class="xp-logo"><img src="assets/logos/yeshiva.png" alt="Yeshiva University logo" onerror="this.replaceWith(document.createTextNode('YU'))"></div>
+        <div class="xp-logo"><img src="assets/logos/yeshiva.jpg" alt="Yeshiva University logo" onerror="this.replaceWith(document.createTextNode('YU'))"></div>
         <div class="xp-meta">
           <div class="xp-role">Graduate Assistant — AI &amp; Admissions</div>
           <div class="xp-org">Yeshiva University, Katz School of Science &amp; Health</div>
