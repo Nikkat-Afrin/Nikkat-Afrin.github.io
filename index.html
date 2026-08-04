@@ -223,6 +223,21 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
   .xp-card{padding:20px}
 }
 
+
+/* ---------- project covers + show more ---------- */
+.p-cover{margin:-26px -26px 16px;height:186px;overflow:hidden;position:relative;background:#0a1120;
+  border-bottom:1px solid var(--line)}
+.p-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.p-card:hover .p-cover img{transform:scale(1.05)}
+.p-cover::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(10,18,34,.72) 0%,transparent 42%)}
+.p-play{position:absolute;bottom:10px;right:11px;z-index:2;font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.1em;color:#a5f3fc;background:rgba(4,10,22,.78);
+  border:1px solid rgba(34,211,238,.4);border-radius:100px;padding:3px 9px;backdrop-filter:blur(4px)}
+.more-wrap{display:flex;justify-content:center;margin-top:30px}
+.p-hidden{display:none!important}
+@media(max-width:640px){.p-cover{height:168px}}
+
 /* projects */
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:34px}
 .fbtn{background:rgba(12,18,38,.6);border:1px solid var(--line);color:var(--dim);
@@ -747,6 +762,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
     <button class="fbtn" data-f="research">Research</button>
   </div>
   <div class="pgrid" id="pgrid"></div>
+  <div class="more-wrap rv"><button class="btn btn-g" id="moreBtn">Show all projects ↓</button></div>
 </section>
 
 <!-- ================= DASHBOARDS ================= -->
@@ -967,127 +983,127 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 /* ---------------- projects ---------------- */
 const PROJECTS=[
- {t:'Speech-AI Reading Assessment Pipeline',k:'ai',kind:'Work · Peblink / WLRC',
+ {t:'Speech-AI Reading Assessment Pipeline',img:'speech.svg',k:'ai',kind:'Work · Peblink / WLRC',
   d:'Production speech-AI workflow that transcribes and aligns children\'s oral reading, scores pronunciation, and flags dyslexia-risk patterns in seconds. Serverless AWS: S3 presigned uploads, SQS, Dockerized Lambda, DynamoDB, Athena + QuickSight.',
   m:'93% pronunciation accuracy · 60+ min → under 5 min',
   tags:['faster-Whisper','FastAPI','AWS Lambda','SQS','DynamoDB','Levenshtein','Athena'],
   repo:'https://github.com/Nikkat-Afrin',repoLabel:'GitHub profile →'},
 
- {t:'FELIX — RAG Chatbot for Student Support',k:'ai',kind:'Work · Yeshiva University',
+ {t:'FELIX — RAG Chatbot for Student Support',img:'felix.svg',k:'ai',kind:'Work · Yeshiva University',
   d:'Co-built a retrieval-augmented chatbot giving students instant answers on Canvas navigation, course materials and career resources — grounded in real institutional documents rather than a generic model.',
   m:'LangChain · ChromaDB · GPT-4/3.5 · Flask on Azure',
   tags:['LangChain','ChromaDB','OpenAI','RAG','Flask','Azure'],
   repo:'https://github.com/Nikkat-Afrin',repoLabel:'GitHub profile →'},
 
- {t:'Symplicity Reporting Automation',k:'de',kind:'Work · Yeshiva University',
+ {t:'Symplicity Reporting Automation',img:'symplicity.svg',k:'de',kind:'Work · Yeshiva University',
   d:'Automated Symplicity CSM data ingestion end to end through Azure Functions, Blob Storage, PostgreSQL and Databricks, then surfaced it in Power BI for leadership reporting on advising and engagement.',
   m:'40+ staff hours/week eliminated · advising productivity +12%',
   tags:['Azure Functions','Databricks','PostgreSQL','Power BI','ETL'],
   repo:'https://github.com/Nikkat-Afrin',repoLabel:'GitHub profile →'},
 
- {t:'Real-Time Voice Conversational AI',k:'ai',kind:'Voice AI · Azure',
+ {t:'Real-Time Voice Conversational AI',img:'voice.jpg',gif:'voice.gif',k:'ai',kind:'Voice AI · Azure',
   d:'End-to-end low-latency voice assistant: streaming speech in, reasoned answer out, spoken back. Full-duplex audio over WebSockets with barge-in handling, grounded by RAG over Azure AI Search.',
   m:'FastAPI · WebSockets · GPT-4o · Bicep IaC',
   tags:['Python','FastAPI','Azure Speech','GPT-4o','RAG','Docker'],
   repo:'https://github.com/Nikkat-Afrin/voice-ai-system'},
 
- {t:'SigmaCam — Exact Decision Boundaries',k:'research',kind:'IEEE IJCNN 2025',
+ {t:'SigmaCam — Exact Decision Boundaries',img:'sigmacam.jpg',gif:'sigmacam.gif',k:'research',kind:'IEEE IJCNN 2025',
   d:'Theoretically exact recursive algorithm extracting decision boundaries for MLPs with smooth activations (Sigmoid, SiLU) — where prior exact methods could not go. Pip-installable, GPU-accelerated.',
   m:'First author · 8 Colab demos',
   tags:['PyTorch','Interpretability','CUDA','Research'],
   repo:'https://github.com/Nikkat-Afrin/SigmaCam',
   demo:'https://ieeexplore.ieee.org/abstract/document/11227622',demoLabel:'Read paper →'},
 
- {t:'Swap-Hedging Model Explorer',k:'ml',kind:'Finance ML · Live',
+ {t:'Swap-Hedging Model Explorer',img:'swap.jpg',k:'ml',kind:'Finance ML · Live',
   d:'ML pipeline predicting interest-rate swap hedging adoption across a 2,354 bank-year panel, with a live explorer where you drag the decision threshold and watch precision/recall move.',
   m:'ROC-AUC 0.953 · SHAP explained',
   tags:['XGBoost','SHAP','scikit-learn','Plotly'],
   repo:'https://github.com/Nikkat-Afrin/banking-swap-hedging-ml',
   demo:'https://nikkat-afrin.github.io/banking-swap-hedging-ml/',live:true},
 
- {t:'Healthcare Provider Network Analytics',k:'viz',kind:'Tableau · Live',
+ {t:'Healthcare Provider Network Analytics',img:'tableau.jpg',k:'viz',kind:'Tableau · Live',
   d:'Interactive Tableau dashboards analysing a NYC healthcare insurance provider network — coverage gaps, regional distribution and provider mix, published so anyone can explore without a licence.',
   m:'Published to Tableau Public',
   tags:['Tableau','Healthcare','Geospatial','BI'],
   repo:'https://github.com/Nikkat-Afrin/healthcare-provider-network-tableau',
   demo:'https://public.tableau.com/app/profile/nikkat.afrin/viz/NYCInsuranceNetwork/modifieddashboard',live:true},
 
- {t:'E-Commerce Segmentation & Purchase Intent',k:'ml',kind:'ML · Live',
+ {t:'E-Commerce Segmentation & Purchase Intent',img:'ecom.jpg',k:'ml',kind:'ML · Live',
   d:'K-Means behavioural segmentation plus a purchase-intent model over 12,330 shopping sessions, with a threshold explorer showing the trade-off a marketing team actually tunes.',
   m:'AUC 0.929 · best segment converts 28.4% vs 15.5%',
   tags:['scikit-learn','K-Means','Random Forest','Plotly'],
   repo:'https://github.com/Nikkat-Afrin/customer-churn-segmentation-ecommerce',
   demo:'https://nikkat-afrin.github.io/customer-churn-segmentation-ecommerce/',live:true},
 
- {t:'Global Human Development Dashboard',k:'viz',kind:'Data Viz · Live',
+ {t:'Global Human Development Dashboard',img:'hdi.jpg',k:'viz',kind:'Data Viz · Live',
   d:'Interactive choropleth and scatter over UNDP HDR 2021–22 covering 191 countries, plus a regression decomposing which pillars actually drive the composite index.',
   m:'191 countries · R² ≈ 0.98',
   tags:['Plotly','pandas','statsmodels','Choropleth'],
   repo:'https://github.com/Nikkat-Afrin/hdi-global-policy-analysis',
   demo:'https://nikkat-afrin.github.io/hdi-global-policy-analysis/',live:true},
 
- {t:'Climate Indicators ETL & Dashboard',k:'de',kind:'Data Engineering · Live',
+ {t:'Climate Indicators ETL & Dashboard',img:'climate.svg',k:'de',kind:'Data Engineering · Live',
   d:'Reproducible ETL merging three independent climate sources with different cadences, units and missingness conventions into one analysis-ready 66-year series, with explicit data-quality gates.',
   m:'CO₂ 421 ppm · +1.77 °C · +77 mm sea level',
   tags:['pandas','GeoPandas','ETL','Plotly'],
   repo:'https://github.com/Nikkat-Afrin/climate-change-analysis-python',
   demo:'https://nikkat-afrin.github.io/climate-change-analysis-python/',live:true},
 
- {t:'Healthcare Data Platform — OLTP + DWH + Graph',k:'de',kind:'Data Architecture',
+ {t:'Healthcare Data Platform — OLTP + DWH + Graph',img:'neo4j.jpg',k:'de',kind:'Data Architecture',
   d:'One clinical domain modelled three ways: a normalised PostgreSQL OLTP core, a dimensional warehouse with SCD Type 2 history, and a Neo4j graph for comorbidity and referral traversal.',
   m:'3 storage paradigms, each justified',
   tags:['PostgreSQL','Neo4j','SCD2','Dimensional Modeling','Cypher'],
   repo:'https://github.com/Nikkat-Afrin/disease-management-system-db'},
 
- {t:'Real-Time Multilingual Chat Translation',k:'ai',kind:'AWS · NLP',
+ {t:'Real-Time Multilingual Chat Translation',img:'translate.jpg',gif:'translate.gif',k:'ai',kind:'AWS · NLP',
   d:'Translation layer for Amazon Connect contact-centre chat: agent types English, customer reads their own language, live mid-conversation. Deployed and documented end to end.',
   m:'Lambda · Translate · Comprehend · React',
   tags:['AWS Lambda','Amazon Translate','React','Serverless'],
   repo:'https://github.com/Nikkat-Afrin/Amazon-Connect-chat-translate'},
 
- {t:'NY Education — Leakage-Free ML Comparison',k:'ml',kind:'Machine Learning',
+ {t:'NY Education — Leakage-Free ML Comparison',img:'nyedu.jpg',k:'ml',kind:'Machine Learning',
   d:'Four algorithms compared on 73,152 NY graduation records. Every outcome-derived column dropped to prevent leakage — so the honest result is modest, and the simple model nearly matches the complex one.',
   m:'GBoost AUC 0.878 vs LogReg 0.870',
   tags:['scikit-learn','Gradient Boosting','Leakage Prevention'],
   repo:'https://github.com/Nikkat-Afrin/ny-education-ml-comparison'},
 
- {t:'Insurance Cross-Sell Lead Scoring',k:'ml',kind:'Machine Learning',
+ {t:'Insurance Cross-Sell Lead Scoring',img:'insurance.jpg',k:'ml',kind:'Machine Learning',
   d:'Turns a 14,016-customer book into a ranked call list. Sequential feature selection, KNN/SVM/RF compared, plus a fairness check on selection rates across groups.',
   m:'ROC-AUC 0.974 · F1 0.922',
   tags:['scikit-learn','SVM','KNN','mlxtend','Fairness'],
   repo:'https://github.com/Nikkat-Afrin/insurance-cross-sell-prediction'},
 
- {t:'Customer Purchase Prediction',k:'ml',kind:'Machine Learning',
+ {t:'Customer Purchase Prediction',img:'purchase.jpg',k:'ml',kind:'Machine Learning',
   d:'Next-best-offer classifier with a documented path from interpretable baseline to ensemble. The baseline stays in the repo on purpose — reporting the starting point is what makes the gain legible.',
   m:'Baseline AUC 0.83 → 0.977',
   tags:['scikit-learn','Random Forest','pandas'],
   repo:'https://github.com/Nikkat-Afrin/customer-purchase-prediction'},
 
- {t:'News Virality Neural Network',k:'ai',kind:'Deep Learning',
+ {t:'News Virality Neural Network',img:'news.svg',k:'ai',kind:'Deep Learning',
   d:'Feed-forward network predicting article share-popularity from ~39,600 articles × 61 features, using only signals available at publication time. Dimensionality reduction to tame correlated features.',
   m:'TensorFlow 2.17 / Keras 3',
   tags:['TensorFlow','Keras','PCA','mlxtend','NLP'],
   repo:'https://github.com/Nikkat-Afrin/news-virality-neural-network'},
 
- {t:'Wine Sales Forecasting',k:'ml',kind:'Data Cleaning + Regression',
+ {t:'Wine Sales Forecasting',img:'wine.jpg',k:'ml',kind:'Data Cleaning + Regression',
   d:'Cleaning a messy 12,795-row dataset, then forecasting cases sold. Engineering a STARS_missing flag — an unrated wine is one nobody bothered to rate — made it a top predictor.',
   m:'R² 0.589 · MAE < 1 case',
   tags:['scikit-learn','KNN Imputation','Gradient Boosting'],
   repo:'https://github.com/Nikkat-Afrin/wine-quality-prediction'},
 
- {t:'E-Commerce Churn — Inference in R',k:'ml',kind:'Statistics · R',
+ {t:'E-Commerce Churn — Inference in R',img:'churnr.svg',k:'ml',kind:'Statistics · R',
   d:'Chi-square tests, t-tests and logistic regression — which returned chance-level AUC. The finding was that the dataset is synthetic and carries no real signal. Diagnosing why beats tuning until it looks good.',
   m:'Honest negative result, reported as such',
   tags:['R','Hypothesis Testing','Logistic Regression'],
   repo:'https://github.com/Nikkat-Afrin/ecommerce-churn-statistics-r'},
 
- {t:'Airline Passenger Behaviour Analytics',k:'viz',kind:'Survey Analytics',
+ {t:'Airline Passenger Behaviour Analytics',img:'airline.svg',k:'viz',kind:'Survey Analytics',
   d:'1,040 respondents × 27 questions from the FiveThirtyEight flying-etiquette survey, quantifying what passengers consider rude and how norms shift across age, income and education.',
   m:'Clear demographic gradients surfaced',
   tags:['pandas','KNN Imputation','Seaborn','EDA'],
   repo:'https://github.com/Nikkat-Afrin/airline-survey-analysis'},
 
- {t:'Applied Statistical Methods in R',k:'viz',kind:'Statistics',
+ {t:'Applied Statistical Methods in R',img:'statsr.svg',k:'viz',kind:'Statistics',
   d:'Reproducible R Markdown labs across the inferential toolkit — probability, sampling distributions, confidence intervals, t-tests, ANOVA, chi-square, and linear/multiple/logistic regression.',
   m:'Knitted from source, not pasted output',
   tags:['R','R Markdown','tidyverse','Inference'],
@@ -1095,9 +1111,17 @@ const PROJECTS=[
 ];
 
 const grid=document.getElementById('pgrid');
+const LIMIT=6;                 // show 6, rest behind "Show more"
+let expanded=false, activeFilter='all';
+
 function render(){
   grid.innerHTML=PROJECTS.map(p=>`
     <article class="card p-card rv in" data-k="${p.k}">
+      ${p.img?`<div class="p-cover">
+        <img src="assets/proj/${p.img}" alt="${p.t}" loading="lazy" decoding="async"
+             ${p.gif?`data-gif="assets/proj/${p.gif}" data-still="assets/proj/${p.img}"`:''}>
+        ${p.gif?'<span class="p-play">▶ HOVER</span>':''}
+      </div>`:''}
       <div class="p-top">
         <span class="p-kind">${p.kind}</span>
         ${p.live?'<span class="p-live">LIVE</span>':''}
@@ -1111,16 +1135,51 @@ function render(){
         ${p.demo?`<a class="lnk demo" href="${p.demo}" target="_blank" rel="noopener">${p.demoLabel||'Live demo →'}</a>`:''}
       </div>
     </article>`).join('');
+  wireGifs();
+  applyView();
 }
+
+/* animated demo only downloads when someone actually hovers the card */
+function wireGifs(){
+  document.querySelectorAll('.p-cover img[data-gif]').forEach(img=>{
+    const card=img.closest('.p-card');
+    card.addEventListener('mouseenter',()=>{ if(img.src.indexOf('.gif')<0) img.src=img.dataset.gif; });
+    card.addEventListener('mouseleave',()=>{ img.src=img.dataset.still; });
+  });
+}
+
+function applyView(){
+  const cards=[...document.querySelectorAll('.p-card')];
+  let shown=0, total=0;
+  cards.forEach(c=>{
+    const match = activeFilter==='all' || c.dataset.k===activeFilter;
+    if(!match){ c.classList.add('p-hidden'); return; }
+    total++;
+    if(expanded || shown<LIMIT){ c.classList.remove('p-hidden'); shown++; }
+    else c.classList.add('p-hidden');
+  });
+  const btn=document.getElementById('moreBtn');
+  if(!btn)return;
+  if(total<=LIMIT){ btn.parentNode.style.display='none'; }
+  else{
+    btn.parentNode.style.display='flex';
+    btn.textContent = expanded ? 'Show fewer ↑' : `Show all ${total} projects ↓`;
+  }
+}
+
 render();
+
 document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('act'));
   b.classList.add('act');
-  const f=b.dataset.f;
-  document.querySelectorAll('.p-card').forEach(c=>{
-    c.classList.toggle('hide',!(f==='all'||c.dataset.k===f));
-  });
+  activeFilter=b.dataset.f; expanded=false;
+  applyView();
 });
+
+document.getElementById('moreBtn').onclick=function(){
+  expanded=!expanded; applyView();
+  if(!expanded)document.getElementById('work').scrollIntoView({behavior:'smooth',block:'start'});
+};
 
 /* ---------------- dashboards ---------------- */
 const DASH=[
