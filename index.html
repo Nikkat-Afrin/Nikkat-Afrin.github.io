@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nikkat Afrin · AI &amp; Data Platform Engineer</title>
 <meta name="author" content="Nikkat Afrin">
-<meta name="description" content="AI &amp; Data Platform Engineer. First-author IEEE IJCNN 2025. Building speech AI, RAG systems, and cloud-native data platforms with Python, AWS and Azure.">
-<meta name="keywords" content="Nikkat Afrin, AI Engineer, Data Engineer, Machine Learning, RAG, Voice AI, Azure, AWS, Python, IEEE IJCNN, SigmaCam, Yeshiva University">
+<meta name="description" content="AI &amp; Data Platform Engineer. Google Cloud Certified Professional Data Engineer. First-author IEEE IJCNN 2025. Building speech AI, RAG systems, and cloud-native data platforms with Python, AWS and Azure.">
+<meta name="keywords" content="Nikkat Afrin, AI Engineer, Data Engineer, Google Cloud Professional Data Engineer, GCP certified, Machine Learning, RAG, Voice AI, Azure, AWS, Python, IEEE IJCNN, SigmaCam, Yeshiva University">
 <meta property="og:title" content="Nikkat Afrin · AI &amp; Data Platform Engineer">
 <meta property="og:description" content="First-author IEEE IJCNN 2025. Speech AI, RAG, and cloud-native data platforms.">
 <meta property="og:type" content="website">
@@ -318,6 +318,27 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 @media(hover:none){.aw-hint::before{content:'TAP'}.aw-hint{font-size:0}.aw-hint::before{font-size:.58rem}}
 @media(prefers-reduced-motion:reduce){.aw-in{transition:none}}
 
+/* ---------- certifications ---------- */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,430px),1fr));gap:20px}
+.cert{display:flex;gap:20px;align-items:flex-start;text-decoration:none;color:inherit;padding:24px}
+.cert-badge{flex:0 0 104px;width:104px;height:104px;display:grid;place-items:center;border-radius:14px;
+  background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  border:1px solid var(--line);transition:.32s}
+.cert:hover .cert-badge{border-color:var(--line-hi);transform:scale(1.04)}
+.cert-badge img{width:84px;height:84px;object-fit:contain;display:block}
+.cert-body{min-width:0;display:flex;flex-direction:column;gap:7px}
+.cert-tag{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--cy);border:1px solid var(--line-hi);border-radius:100px;padding:4px 11px}
+.cert-body h3{font-size:1.14rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;margin:0}
+.cert-org{color:var(--faint);font-size:.85rem;font-weight:500}
+.cert-meta{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;
+  color:var(--faint);display:flex;flex-wrap:wrap;gap:6px 14px}
+.cert-desc{color:var(--dim);font-size:.9rem;line-height:1.6;margin:2px 0 0}
+.cert .lnk{margin-top:4px}
+@media(max-width:520px){.cert{flex-direction:column;gap:16px}
+  .cert-badge{flex-basis:auto;width:88px;height:88px}.cert-badge img{width:70px;height:70px}}
+
 /* ---------- experience cards ---------- */
 .xp{display:grid;gap:18px}
 .xp-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 26px;
@@ -531,6 +552,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
       <a href="#research">Research</a>
       <a href="#work">Projects</a>
       <a href="#awards">Awards</a>
+      <a href="#certifications">Certifications</a>
       <a href="#skills">Skills</a>
       <a href="#creative">Creative</a>
       <a href="#contact" class="nav-cta">Contact</a>
@@ -995,10 +1017,37 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 </section>
 
 
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certifications">
+  <div class="rv">
+    <div class="eyebrow">06 / Credentials</div>
+    <h2 class="sec">Certifications &amp; <span class="grad">licences</span></h2>
+    <p class="sec-sub">Verified credentials. Every badge links straight to the issuer for verification.</p>
+  </div>
+  <div class="cert-grid">
+
+    <a class="card cert rv" href="https://www.credly.com/badges/d0c55214-bba5-4be8-843e-b3e6bb7d40fe/public_url" target="_blank" rel="noopener">
+      <div class="cert-badge">
+        <img src="assets/certs/gcp-pde.png" alt="Google Cloud Certified Professional Data Engineer badge" width="84" height="84" loading="lazy" decoding="async">
+      </div>
+      <div class="cert-body">
+        <span class="cert-tag">◈ Active</span>
+        <h3>Professional Data Engineer</h3>
+        <div class="cert-org">Google Cloud</div>
+        <div class="cert-meta"><span>ISSUED AUG 2026</span><span>EXPIRES AUG 2028</span></div>
+        <p class="cert-desc">Designing, building and operationalising data processing systems on Google Cloud, including BigQuery, Dataflow, Pub/Sub and Dataproc, with a focus on reliability, security and machine-learning readiness.</p>
+        <span class="lnk">Verify on Credly →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
 <!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="rv">
-    <div class="eyebrow">06 / Toolkit</div>
+    <div class="eyebrow">07 / Toolkit</div>
     <h2 class="sec">Technologies I <span class="grad">work in</span></h2>
   </div>
   <div class="sk-grid" id="skgrid"></div>
@@ -1008,7 +1057,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <!-- ================= CREATIVE ================= -->
 <section id="creative">
   <div class="rv">
-    <div class="eyebrow">07 / Creative</div>
+    <div class="eyebrow">08 / Creative</div>
     <h2 class="sec">Sand, canvas &amp; <span class="grad">a hot pan</span></h2>
     <p class="sec-sub">
       I cook and I paint with sand. It's the same instinct as engineering, honestly. Take
@@ -1050,7 +1099,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <div class="contact rv">
-    <div class="eyebrow">08 / Contact</div>
+    <div class="eyebrow">09 / Contact</div>
     <h2 class="sec">Let's build something <span class="grad">meaningful</span></h2>
     <p class="sec-sub" style="margin:0 auto 0">
       I'm open to roles and collaboration in <b>AI/ML engineering, data platforms, and applied AI research</b>.
