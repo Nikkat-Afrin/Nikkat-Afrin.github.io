@@ -160,6 +160,11 @@ h1{font-size:clamp(2.9rem,8.4vw,5.6rem);font-weight:700;line-height:.98;letter-s
 .pin-1{border-color:rgba(255,212,121,.28)}
 .pin-2{bottom:12%;right:-48px;border-color:var(--line-hi);animation-delay:-1.8s}
 .pin-2 b{color:var(--cy)}
+.pin-3{bottom:31%;left:-70px;border-color:rgba(138,180,248,.32);animation-delay:-2.7s}
+.pin-3 b{color:#8ab4f8}
+.pin i img{display:block;width:26px;height:26px;object-fit:contain;
+  border-radius:50%;background:#f1f3f4;padding:1px}
+@media(max-width:1120px){.pin-1{left:-26px}.pin-3{left:-4px}}
 .fig-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);z-index:3;
   font-family:'JetBrains Mono',monospace;font-size:.63rem;font-weight:500;letter-spacing:.24em;
   color:var(--faint);opacity:.72;transition:opacity .3s;pointer-events:none}
@@ -521,7 +526,8 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
   .orb1{width:250px;height:250px;margin-left:-125px}.orb2{width:322px;height:322px;margin-left:-161px}.orb3{width:394px;height:394px;margin-left:-197px}
   .portal{width:300px;height:300px}
   .pin{padding:8px 12px}.pin b{font-size:.715rem}.pin small{font-size:.545rem}
-  .pin-1{left:-16px}.pin-2{right:-14px}
+  .pin-1{left:-16px}.pin-2{right:-14px}.pin-3{left:-14px;bottom:34%}
+  .pin i img{width:22px;height:22px}
   .nav-links{position:fixed;inset:56px 0 auto;flex-direction:column;background:rgba(4,5,13,.97);
     padding:22px 26px;gap:16px;border-bottom:1px solid var(--line);display:none}
   .nav-links.open{display:flex}
@@ -575,6 +581,7 @@ footer .q{font-style:italic;color:var(--dim);margin-bottom:8px}
         </div>
         <span class="pin pin-1"><i>★</i><b>IEEE IJCNN 2025</b><small>First author · SigmaCam</small></span>
         <span class="pin pin-2"><i>🤖</i><b>AI &amp; LLMs</b><small>RAG · GPT-4o · Whisper</small></span>
+        <span class="pin pin-3"><i><img src="assets/certs/gcp-pde.png" alt="" width="26" height="26" loading="lazy" decoding="async"></i><b>Google Cloud Certified</b><small>Professional Data Engineer</small></span>
       </div>
       <span class="fig-hint">HOVER ME</span>
     </div>
